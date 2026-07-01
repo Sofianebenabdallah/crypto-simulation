@@ -44,6 +44,18 @@ New pages are added by **dropping a file in `/src/pages/**` — the route appear
 ## Pages
 - `/` (src/pages/index.tsx) — design system showcase, now @design "reference" (dark).
 - `/sinvestir` (src/pages/sinvestir.tsx) — full landing rewritten from Figma, @design "reference". Uses original Figma image assets from `krisspy.blob.core.windows.net/public/figma-assets/img/`. FAQ = interactive accordion; comparators = horizontal snap-scroll.
+- `/crypto` (src/pages/crypto.tsx) — crypto DCA simulator page.
+- `/crypto/embed` (src/pages/crypto/embed.tsx) — embeddable simulator, fully configured via GET params (asset, currency, amount, frequency, start, end, layout, theme, readonly). `layout=false` = no chrome/margins for iframe. `theme=light` overrides CSS vars at runtime.
+
+## Features — Crypto Simulator
+- Data source ISOLATED in `src/lib/crypto/cryptoApi.ts` (only file knowing the URL). Base overridable via `VITE_CRYPTO_API_BASE`, default `https://digital-assets.fritzy.finance`. CoinGecko-shaped `{ prices: [[tsMs, price]] }`. Swap via `MarketDataSource` interface.
+- Pipeline: `cryptoApi` → `normalizeMarketData` (1 pt/day, binary-search `priceOnOrBefore` fallback) → `calculateDcaSimulation` (pure engine, all indicators + downsampled timeline) → `useCryptoSimulation` hook (fetch+cache+debounce+loading/error/retry).
+- Assets registry `src/data/crypto-assets.json` + `lib/crypto/assets.ts` (`SUPPORTED_ASSETS` = validated ids only). Formatters in `lib/crypto/format.ts`. Embed params in `lib/crypto/queryParams.ts`.
+- UI in `src/components/simulators/crypto/` — `CryptoSimulator` (autonomous orchestrator), Form, KeyFigures (hero result card + tiles), History + ProfitLoss charts (recharts, multi-series: Valeur/Investi/Acquis/Gains-Pertes). Shared bits in `chartShared.tsx` (`RichTooltip`, `ChartLegend`, `SERIES` colours, `BRUSH_BASE`, `ChartRange`).
+- Time-zoom: both charts share a recharts `<Brush>` synced via `range`/`onRangeChange` state in `CryptoSimulator` (reset to full on new data; "Vue complète" button appears when zoomed).
+- Charts lib: `recharts` added to package.json.
+- Added `src/vite-env.d.ts` (`/// <reference types="vite/client" />`) so `import.meta.env`/`glob` typecheck under tsc.
+- Plan doc: `plan/plan-action.md`.
 
 ## Key Files
 
