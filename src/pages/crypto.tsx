@@ -8,12 +8,15 @@
  * @flowName "Simulateurs"
  */
 
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { Code2 } from 'lucide-react';
 import { PillBadge } from '../components/ui';
 import { CryptoSimulator } from '../components/simulators/crypto/CryptoSimulator';
+import { EmbedModal } from '../components/simulators/crypto/EmbedModal';
 
 export default function CryptoSimulatorPage() {
+  const [embedOpen, setEmbedOpen] = useState(false);
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-page-gradient font-body text-white">
       {/* Decorative glow behind the hero, matching the landing page. */}
@@ -34,11 +37,13 @@ export default function CryptoSimulatorPage() {
         <CryptoSimulator />
 
         <div className="mt-8 flex justify-center">
-          <Link to="/crypto/embed?layout=false" className="link-arrow" target="_blank" rel="noreferrer">
-            <Code2 size={16} /> Voir la version intégrable (embed)
-          </Link>
+          <button type="button" onClick={() => setEmbedOpen(true)} className="link-arrow">
+            <Code2 size={16} /> Intégrer ce simulateur
+          </button>
         </div>
       </div>
+
+      <EmbedModal open={embedOpen} onClose={() => setEmbedOpen(false)} />
     </div>
   );
 }
