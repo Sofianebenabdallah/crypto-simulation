@@ -8,8 +8,35 @@
  */
 
 import { Link } from 'react-router-dom';
-import { ArrowRight, Coins, LayoutTemplate, Palette, Code2 } from 'lucide-react';
+import { ArrowRight, Coins, LayoutTemplate, Palette, Code2, Sparkles, PanelsTopLeft, Workflow } from 'lucide-react';
 import { Card, PillBadge } from '../components/ui';
+
+interface Canvas {
+  href: string;
+  icon: React.ReactNode;
+  badge: string;
+  title: string;
+  description: string;
+}
+
+const CANVASES: Canvas[] = [
+  {
+    href: 'https://labs.krisspy.ai/share/1R3njMDfgr3H9qOGMXGc5/5c2b49545c2e6aba1e150a33ff0d9744?view=custom%3A%2Fstoryloop-custom%2FPresentationProduit.tsx',
+    icon: <PanelsTopLeft size={24} />,
+    badge: 'Présentation produit',
+    title: 'Le projet expliqué de bout en bout',
+    description:
+      "Un canva interactif présente tout le projet comme le ferait un product manager : la marque, le design system, les pages et le parcours découverte, avec des aperçus live de chaque écran.",
+  },
+  {
+    href: 'https://labs.krisspy.ai/share/1R3njMDfgr3H9qOGMXGc5/8762b495ed3c240c38fa155f23a73529?view=custom%3A%2Fstoryloop-custom%2FArchitectureTechnique.tsx',
+    icon: <Workflow size={24} />,
+    badge: 'Architecture technique',
+    title: 'Comment le projet est construit',
+    description:
+      "La vue tech lead : structure du dossier, design system piloté par tokens et couche de données découplée — pour changer d’API sans rien casser.",
+  },
+];
 
 interface Destination {
   to: string;
@@ -35,6 +62,20 @@ const DESTINATIONS: Destination[] = [
       'Graphiques historique & gains/pertes avec zoom temporel',
     ],
     cta: 'Ouvrir le simulateur',
+  },
+  {
+    to: '/crypto/decouverte',
+    icon: <Sparkles size={22} />,
+    badge: 'Onboarding',
+    title: 'Parcours découverte',
+    description:
+      "Une version guidée du simulateur crypto : on onboarde pas à pas un utilisateur qui découvre le DCA, sans jargon.",
+    points: [
+      'Trois étapes : la mise, la crypto, le résultat',
+      'Top 5 des cryptos à choisir en un clic',
+      'Chaque étape vit dans l’URL — rejouable et intégrable',
+    ],
+    cta: 'Lancer le parcours',
   },
   {
     to: '/sinvestir',
@@ -82,7 +123,32 @@ export default function Home() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {CANVASES.map((c) => (
+            <a key={c.href} href={c.href} target="_blank" rel="noopener noreferrer" className="group block">
+              <Card className="flex h-full flex-col gap-4 border-secondary/25 bg-primary/10 transition-all duration-200 group-hover:-translate-y-1 group-hover:border-secondary/40">
+                <div className="flex items-center justify-between">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-secondary/30 bg-primary/25 text-secondary">
+                    {c.icon}
+                  </span>
+                  <span className="font-label text-[11px] uppercase tracking-wide text-secondary">
+                    {c.badge}
+                  </span>
+                </div>
+                <div>
+                  <h2 className="mb-1.5 font-heading text-lg font-semibold">{c.title}</h2>
+                  <p className="text-sm leading-relaxed text-secondary">{c.description}</p>
+                </div>
+                <span className="link-arrow mt-auto text-sm">
+                  Ouvrir le canva{' '}
+                  <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                </span>
+              </Card>
+            </a>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {DESTINATIONS.map((d) => (
             <Link key={d.to} to={d.to} className="group">
               <Card className="flex h-full flex-col transition-all duration-200 group-hover:-translate-y-1 group-hover:border-white/25">

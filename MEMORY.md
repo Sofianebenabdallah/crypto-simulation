@@ -27,6 +27,8 @@ Premier outil livré : simulateur crypto DCA, avec version intégrable par ifram
 
 - `storyloop-custom/PresentationProduit.tsx` — board de présentation produit (PM) : hero de marque, section 01 design system (brandPanel palette/typo + iframe /designsystem), section 02 pages (/ et /sinvestir), section 03 simulateur + flow d'intégration (crypto → ?embed=1 modal → /crypto/embed), section 04 parcours découverte (3 étapes URL montant→actif→resultats). Edges narratifs animés.
 - Les aperçus sont des `browserFrame` (iframe custom du build déployé, PAS PreviewNode) pointant sur `BASE_URL = https://preview.sinvestir.deploy.krisspy.ai`. iframe rendue en largeur desktop puis `transform: scale()` pour tenir dans le cadre.
+- `storyloop-custom/ArchitectureTechnique.tsx` — board d'architecture (tech lead) : section 01 structure du dossier (`fileTree` de src/), 02 design system piloté par tokens (theme.css → échelle Tailwind color-mix 50→900 → components/ui, avec `codeCard` snippet scale()), 03 dossier crypto découplé (pipeline `techCard` cryptoApi→normalize→moteur pur→hook→UI + `codeCard` du swap `marketDataSource`), 04 routing par fichiers & intégration URL. Node types: brandHero, sectionTitle, fileTree, techCard, codeCard, note.
+- Home (`/`) référence le canva de présentation via `<a>` externe (CANVAS_URL labs.krisspy.ai/share/...) + carte vers `/crypto/decouverte`.
 - Sandbox canvas: uniquement imports `react`/`reactflow`/`lucide-react`/`react-router-dom`/`@krisspy/canvas`, styles inline, jamais d'import depuis `src/`.
 
 ## Features — Crypto Simulator
