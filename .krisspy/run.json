@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "startCommand": "([ -d node_modules ] && [ -f node_modules/.package-lock.json ] || npm install) && npm run dev -- --port $PORT --strictPort --host 0.0.0.0",
+  "devCommand": "npm run dev -- --port $PORT --strictPort --host 0.0.0.0",
+  "buildCommand": "npm run build"
+}

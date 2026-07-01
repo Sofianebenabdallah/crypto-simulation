@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "stack": "custom",
+  "github": {
+    "repo": "Sofianebenabdallah/crypto-simulation",
+    "branch": "main",
+    "isPrivate": false
+  },
+  "themeMeta": {
+    "themeId": "qN7MZlf2LxPW5kWoFDMIm",
+    "themeName": "S'investir DS2",
+    "lastSyncedAt": "2026-07-01T20:07:50.518Z",
+    "toSync": true
+  },
+  "domains": [],
+  "lock": {
+    "environment": "local",
+    "sessionId": "3b4a6b28-3672-4821-8239-14ea446cb0fa",
+    "userId": "oGxOsuDTWcfzrZ3RG9Cku",
+    "acquiredAt": "2026-07-01T19:29:58.936Z",
+    "hostname": "MacIntel"
+  }
+}
