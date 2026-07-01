@@ -543,13 +543,23 @@ const INITIAL_NODES: any[] = [
   {"id":"frame-embed","type":"browserFrame","position":{"x":1760,"y":2540},"data":{"title":"Version embarquée","route":"/crypto/embed?asset=bitcoin&currency=eur&amount=50&frequency=weekly&layout=false","displayUrl":"preview.sinvestir.deploy.krisspy.ai/crypto/embed?…&layout=false","icon":"code","accent":"#22c55e","frameWidth":700,"designWidth":900,"designHeight":1000},"width":700,"height":826},
   {"id":"note-crypto","type":"note","position":{"x":40,"y":3150},"data":{"label":"Simulateur · /crypto","accent":"#0049C6","text":"Actif, montant, fréquence et période → capital, quantité, prix moyen, gains/pertes + graphiques historique & P/L avec zoom temporel."},"width":340,"height":164},
   {"id":"note-modal","type":"note","position":{"x":900,"y":3150},"data":{"label":"Flow d’intégration","accent":"#1098F7","text":"?embed=1 ouvre la modal façon YouTube : on règle les paramètres, on voit un aperçu live, puis on copie le lien direct ou le snippet <iframe>."},"width":340,"height":164},
-  {"id":"note-embed","type":"note","position":{"x":1760,"y":3150},"data":{"label":"Embarquable · /crypto/embed","accent":"#22c55e","text":"Configurée par paramètres GET. layout=false retire l’habillage, theme=light surcharge les variables, readonly=true verrouille les champs."},"width":340,"height":164},
+  {"id":"note-embed","type":"note","position":{"x":1758.8459102444506,"y":3400.4374769542133},"data":{"label":"Embarquable · /crypto/embed","accent":"#22c55e","text":"Configurée par paramètres GET. layout=false retire l’habillage, theme=light surcharge les variables, readonly=true verrouille les champs."},"width":340,"height":164},
+
+  // ── Section 04 · Parcours découverte (onboarding piloté par l'URL) ──
+  {"id":"sec-tour","type":"sectionTitle","position":{"x":40,"y":3760},"data":{"step":"04","title":"Parcours découverte — product tour","subtitle":"Une version onboardée du simulateur qui guide l’utilisateur pas à pas. Chaque étape vit dans l’URL (?step=…), donc rejouable et intégrable telle quelle."},"width":620,"height":93},
+  {"id":"frame-tour-montant","type":"browserFrame","position":{"x":40,"y":3960},"data":{"title":"Étape 1 · La mise","route":"/crypto/decouverte?step=montant","displayUrl":"…/crypto/decouverte?step=montant","icon":"coins","accent":"#0049C6","frameWidth":700,"designWidth":1280,"designHeight":900},"width":700,"height":538},
+  {"id":"frame-tour-actif","type":"browserFrame","position":{"x":800,"y":3960},"data":{"title":"Étape 2 · La crypto","route":"/crypto/decouverte?step=actif&amount=50&frequency=monthly","displayUrl":"…?step=actif&amount=50&frequency=monthly","icon":"cursor","accent":"#1098F7","frameWidth":700,"designWidth":1280,"designHeight":900},"width":700,"height":538},
+  {"id":"frame-tour-resultats","type":"browserFrame","position":{"x":1560,"y":3960},"data":{"title":"Étape 3 · Le résultat","route":"/crypto/decouverte?step=resultats&asset=bitcoin&amount=50&frequency=monthly","displayUrl":"…?step=resultats&asset=bitcoin&amount=50…","icon":"coins","accent":"#22c55e","frameWidth":700,"designWidth":1280,"designHeight":1500},"width":700,"height":866},
+  {"id":"note-tour","type":"note","position":{"x":40,"y":4540},"data":{"label":"Pourquoi un product tour","accent":"#0049C6","text":"Plutôt qu’un pavé de texte, on onboarde : mise → crypto (top 5) → révélation des courbes. L’utilisateur peut revenir en arrière ou ouvrir le simulateur complet."},"width":340,"height":180},
+  {"id":"note-tour-url","type":"note","position":{"x":800,"y":4540},"data":{"label":"Étapes dans l’URL","accent":"#1098F7","text":"?step=montant | actif | resultats, plus amount / frequency / asset. Chaque écran est reproductible, ce qui permet de le rejouer ici en iframe pour raconter le workflow."},"width":340,"height":180},
 ];
 
 const INITIAL_EDGES = [
   {"id":"e-brand-ds","source":"brand-panel","target":"frame-designsystem","type":"smoothstep","label":"Tokens en action","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
   {"id":"e-crypto-modal","source":"frame-crypto","target":"frame-crypto-modal","type":"smoothstep","label":"1 · « Intégrer ce simulateur »","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
   {"id":"e-modal-embed","source":"frame-crypto-modal","target":"frame-embed","type":"smoothstep","label":"2 · Copier le snippet iframe","animated":true,"style":{"stroke":"#22c55e","strokeWidth":2}},
+  {"id":"e-tour-1-2","source":"frame-tour-montant","target":"frame-tour-actif","type":"smoothstep","label":"Continuer","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
+  {"id":"e-tour-2-3","source":"frame-tour-actif","target":"frame-tour-resultats","type":"smoothstep","label":"Choix de la crypto","animated":true,"style":{"stroke":"#22c55e","strokeWidth":2}},
 ];
 
 function Inner({ canvasId, filePath }: { canvasId: string; filePath: string }) {

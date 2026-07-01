@@ -21,10 +21,11 @@ Premier outil livré : simulateur crypto DCA, avec version intégrable par ifram
 - `/crypto` (src/pages/crypto.tsx) — crypto DCA simulator + "Intégrer ce simulateur" button opening EmbedModal.
 - `/crypto/embed` (src/pages/crypto/embed.tsx) — embeddable, configured via GET params. `layout=false` = no chrome; `theme=light` overrides CSS vars at runtime.
 - `/crypto?embed=1` (also `?embed=true` / `?modal=embed`) — auto-ouvre l'EmbedModal au chargement (helper `shouldAutoOpenEmbed` dans crypto.tsx), utilisé pour montrer le flow modal en iframe.
+- `/crypto/decouverte` (src/pages/crypto/decouverte.tsx) — parcours d'onboarding « product tour » : 3 étapes (montant → actif top 5 → résultats). Piloté par l'URL via `?step=montant|actif|resultats` + `amount`/`frequency`/`asset` (react-router `useSearchParams`), donc chaque étape est rejouable/intégrable en iframe. Réutilise `<CryptoSimulator hideForm>` pour la révélation des courbes. Top 5 = BTC/ETH/BNB/SOL/XRP (hors stablecoins).
 
 ## Storyloop custom canvas
 
-- `storyloop-custom/PresentationProduit.tsx` — board de présentation produit (PM) : hero de marque, section 01 design system (brandPanel palette/typo + iframe /designsystem), section 02 pages (/ et /sinvestir), section 03 simulateur + flow d'intégration (crypto → ?embed=1 modal → /crypto/embed). Edges narratifs animés.
+- `storyloop-custom/PresentationProduit.tsx` — board de présentation produit (PM) : hero de marque, section 01 design system (brandPanel palette/typo + iframe /designsystem), section 02 pages (/ et /sinvestir), section 03 simulateur + flow d'intégration (crypto → ?embed=1 modal → /crypto/embed), section 04 parcours découverte (3 étapes URL montant→actif→resultats). Edges narratifs animés.
 - Les aperçus sont des `browserFrame` (iframe custom du build déployé, PAS PreviewNode) pointant sur `BASE_URL = https://preview.sinvestir.deploy.krisspy.ai`. iframe rendue en largeur desktop puis `transform: scale()` pour tenir dans le cadre.
 - Sandbox canvas: uniquement imports `react`/`reactflow`/`lucide-react`/`react-router-dom`/`@krisspy/canvas`, styles inline, jamais d'import depuis `src/`.
 
