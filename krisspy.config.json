@@ -16,12 +16,25 @@
     "lastSyncedAt": "2026-07-01T20:07:50.518Z",
     "toSync": true
   },
-  "domains": [],
+  "domains": [
+    {
+      "domain": "preview.sinvestir.deploy.krisspy.ai",
+      "type": "krisspy-subdomain",
+      "status": "configured",
+      "environment": "preview"
+    }
+  ],
+  "primaryDomain": "preview.sinvestir.deploy.krisspy.ai",
   "lock": {
     "environment": "local",
     "sessionId": "3b4a6b28-3672-4821-8239-14ea446cb0fa",
     "userId": "oGxOsuDTWcfzrZ3RG9Cku",
     "acquiredAt": "2026-07-01T19:29:58.936Z",
     "hostname": "MacIntel"
+  },
+  "custom": {
+    "runtime": "vm",
+    "vmUrl": "http://localhost:63824",
+    "vmUrlVerifiedAt": "2026-07-01T21:07:30.760Z"
   }
 }

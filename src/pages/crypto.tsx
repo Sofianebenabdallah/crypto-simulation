@@ -14,8 +14,17 @@ import { PillBadge } from '../components/ui';
 import { CryptoSimulator } from '../components/simulators/crypto/CryptoSimulator';
 import { EmbedModal } from '../components/simulators/crypto/EmbedModal';
 
+// Ouverture automatique de la modal d'intégration via `?embed=1` (ou `?modal=embed`).
+// Utilisé pour montrer le flow d'intégration dans un aperçu iframe (canvas Storyloop).
+function shouldAutoOpenEmbed(): boolean {
+  if (typeof window === 'undefined') return false;
+  const params = new URLSearchParams(window.location.search);
+  const embed = params.get('embed');
+  return embed === '1' || embed === 'true' || params.get('modal') === 'embed';
+}
+
 export default function CryptoSimulatorPage() {
-  const [embedOpen, setEmbedOpen] = useState(false);
+  const [embedOpen, setEmbedOpen] = useState(shouldAutoOpenEmbed);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-page-gradient font-body text-white">
