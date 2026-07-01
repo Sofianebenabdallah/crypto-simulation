@@ -73,7 +73,7 @@ export function CryptoKeyFigures({ result }: Props) {
         <Tile
           icon={<Coins size={16} />}
           label={`Quantité acquise`}
-          value={`${formatNumber(result.quantity, 4)}`}
+          value={`${formatNumber(result.quantity, 2)}`}
           sub={symbol}
         />
         <Tile

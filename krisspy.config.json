@@ -1,6 +1,9 @@
 {
   "version": 2,
   "stack": "custom",
+  "netlify": {
+    "preview": "8ad436c3-2810-4197-b0be-7caf70ea7caa"
+  },
   "github": {
     "repo": "Sofianebenabdallah/crypto-simulation",
     "branch": "main",
@@ -20,10 +23,5 @@
     "userId": "oGxOsuDTWcfzrZ3RG9Cku",
     "acquiredAt": "2026-07-01T19:29:58.936Z",
     "hostname": "MacIntel"
-  },
-  "custom": {
-    "runtime": "vm",
-    "vmUrl": "http://localhost:63824",
-    "vmUrlVerifiedAt": "2026-07-01T20:21:58.738Z"
   }
 }

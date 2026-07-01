@@ -16,9 +16,12 @@ export function formatCurrency(value: number, currency = 'EUR', maximumFractionD
   }).format(value);
 }
 
-export function formatNumber(value: number, digits = 4): string {
+export function formatNumber(value: number, digits = 2): string {
   if (!isFinite(value)) return '—';
-  return new Intl.NumberFormat('fr-FR', { maximumFractionDigits: digits }).format(value);
+  return new Intl.NumberFormat('fr-FR', {
+    maximumFractionDigits: digits,
+    useGrouping: true,
+  }).format(value);
 }
 
 export function formatPercent(ratio: number): string {
