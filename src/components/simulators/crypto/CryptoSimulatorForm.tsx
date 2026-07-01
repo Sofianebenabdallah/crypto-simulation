@@ -18,7 +18,7 @@ const CURRENCIES = ['EUR', 'USD'];
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="font-label text-xs uppercase tracking-wide text-secondary">{label}</span>
+      <span className="font-label text-xs uppercase tracking-wide text-secondary leading-tight min-h-[2rem] flex items-start">{label}</span>
       {children}
     </label>
   );
