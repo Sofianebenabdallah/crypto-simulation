@@ -9,6 +9,7 @@
  */
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
   Sparkles,
@@ -26,34 +27,30 @@ import { DEFAULT_CONFIG } from '../../lib/crypto/queryParams';
 import type { Frequency, SimulationInput } from '../../types/crypto';
 
 // ── Étapes du parcours (reflétées dans l'URL via ?step=) ──────────────
+// URL keys stay in French for backward compatibility; tKey maps to i18n.
 type Step = 'montant' | 'actif' | 'resultats';
-const STEPS: { key: Step; label: string }[] = [
-  { key: 'montant', label: 'Ta mise' },
-  { key: 'actif', label: 'Ta crypto' },
-  { key: 'resultats', label: 'Le résultat' },
+const STEPS: { key: Step; tKey: string }[] = [
+  { key: 'montant', tKey: 'amount' },
+  { key: 'actif', tKey: 'asset' },
+  { key: 'resultats', tKey: 'results' },
 ];
 
 // Top 5 des cryptos les plus connues (hors stablecoins, pour des courbes parlantes).
 const TOP5 = [
-  { id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC', color: '#F7931A', tag: 'La référence' },
-  { id: 'ethereum', name: 'Ethereum', symbol: 'ETH', color: '#627EEA', tag: 'Smart contracts' },
-  { id: 'binancecoin', name: 'BNB', symbol: 'BNB', color: '#F3BA2F', tag: 'Écosystème Binance' },
-  { id: 'solana', name: 'Solana', symbol: 'SOL', color: '#14A9F1', tag: 'Rapide & scalable' },
-  { id: 'ripple', name: 'XRP', symbol: 'XRP', color: '#4AA7D8', tag: 'Paiements' },
+  { id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC', color: '#F7931A' },
+  { id: 'ethereum', name: 'Ethereum', symbol: 'ETH', color: '#627EEA' },
+  { id: 'binancecoin', name: 'BNB', symbol: 'BNB', color: '#F3BA2F' },
+  { id: 'solana', name: 'Solana', symbol: 'SOL', color: '#14A9F1' },
+  { id: 'ripple', name: 'XRP', symbol: 'XRP', color: '#4AA7D8' },
 ];
 
-const FREQ: { value: Frequency; label: string; hint: string }[] = [
-  { value: 'daily', label: 'Chaque jour', hint: 'Quotidien' },
-  { value: 'weekly', label: 'Chaque semaine', hint: 'Hebdomadaire' },
-  { value: 'monthly', label: 'Chaque mois', hint: 'Mensuel' },
+const FREQ: { value: Frequency }[] = [
+  { value: 'daily' },
+  { value: 'weekly' },
+  { value: 'monthly' },
 ];
 
 const AMOUNT_PRESETS = [10, 25, 50, 100];
-const FREQ_SENTENCE: Record<Frequency, string> = {
-  daily: 'chaque jour',
-  weekly: 'chaque semaine',
-  monthly: 'chaque mois',
-};
 
 function parseAmount(raw: string | null): number {
   const a = Number(raw);
@@ -65,6 +62,7 @@ function parseFreq(raw: string | null): Frequency {
 
 // ── Indicateur d'étapes ───────────────────────────────────────────────
 function Stepper({ current }: { current: Step }) {
+  const { t } = useTranslation();
   const activeIdx = STEPS.findIndex((s) => s.key === current);
   return (
     <div className="flex items-center justify-center gap-2 sm:gap-4">
@@ -88,7 +86,7 @@ function Stepper({ current }: { current: Step }) {
                 className="hidden font-label text-sm sm:inline"
                 style={{ color: active ? '#fff' : 'var(--text-secondary)' }}
               >
-                {s.label}
+                {t(`decouverte.steps.${s.tKey}`)}
               </span>
             </div>
             {i < STEPS.length - 1 && (
@@ -105,6 +103,7 @@ function Stepper({ current }: { current: Step }) {
 }
 
 export default function CryptoDecouverte() {
+  const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
   const step = (params.get('step') as Step) || 'montant';
 
@@ -143,7 +142,7 @@ export default function CryptoDecouverte() {
       <div className="relative mx-auto max-w-5xl px-4 py-10 sm:px-8 sm:py-14">
         {/* En-tête + stepper */}
         <header className="mb-10 flex flex-col items-center gap-5 text-center">
-          <PillBadge>Mode découverte</PillBadge>
+          <PillBadge>{t('decouverte.badge')}</PillBadge>
           <Stepper current={step} />
         </header>
 
@@ -156,17 +155,16 @@ export default function CryptoDecouverte() {
               </span>
               <div>
                 <h1 className="font-heading text-2xl font-semibold sm:text-3xl">
-                  Et si tu avais investi un peu, régulièrement&nbsp;?
+                  {t('decouverte.amount.title')}
                 </h1>
                 <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-secondary">
-                  Ce simulateur remonte le temps&nbsp;: il te montre ce qu'une petite somme placée
-                  régulièrement dans une crypto aurait donné aujourd'hui — sans tout miser d'un coup.
+                  {t('decouverte.amount.description')}
                 </p>
               </div>
 
               <div className="w-full max-w-md text-left">
                 <label className="font-label text-xs uppercase tracking-wide text-secondary">
-                  Quelle somme aurais-tu pu mettre à chaque fois&nbsp;?
+                  {t('decouverte.amount.amountLabel')}
                 </label>
                 <div className="relative mt-2">
                   <input
@@ -202,7 +200,7 @@ export default function CryptoDecouverte() {
 
               <div className="w-full max-w-md text-left">
                 <span className="font-label text-xs uppercase tracking-wide text-secondary">
-                  À quel rythme&nbsp;?
+                  {t('decouverte.amount.rhythmLabel')}
                 </span>
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {FREQ.map((f) => {
@@ -223,7 +221,7 @@ export default function CryptoDecouverte() {
                           className="font-label text-sm"
                           style={{ color: on ? '#fff' : 'var(--text-secondary)' }}
                         >
-                          {f.label}
+                          {t(`decouverte.frequencies.${f.value}`)}
                         </span>
                       </button>
                     );
@@ -236,7 +234,7 @@ export default function CryptoDecouverte() {
                 onClick={() => goTo('actif')}
                 disabled={amount <= 0}
               >
-                Continuer <ArrowRight size={18} />
+                {t('decouverte.amount.continue')} <ArrowRight size={18} />
               </Button>
             </div>
           </Card>
@@ -247,14 +245,14 @@ export default function CryptoDecouverte() {
           <div className="mx-auto max-w-3xl">
             <div className="mb-8 text-center">
               <h1 className="font-heading text-2xl font-semibold sm:text-3xl">
-                Sur quelle crypto veux-tu tester&nbsp;?
+                {t('decouverte.asset.title')}
               </h1>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-secondary">
-                Choisis l'une des cryptos les plus connues. On calculera ce que{' '}
+                {t('decouverte.asset.descriptionPrefix')}{' '}
                 <span className="text-white">
-                  {amount} {DEFAULT_CONFIG.currency} {FREQ_SENTENCE[frequency]}
+                  {amount} {DEFAULT_CONFIG.currency} {t(`decouverte.frequencySentence.${frequency}`)}
                 </span>{' '}
-                auraient donné.
+                {t('decouverte.asset.descriptionSuffix')}
               </p>
             </div>
 
@@ -277,7 +275,7 @@ export default function CryptoDecouverte() {
                   </span>
                   <div>
                     <div className="font-heading font-semibold">{coin.name}</div>
-                    <div className="font-label text-xs text-tertiary">{coin.tag}</div>
+                    <div className="font-label text-xs text-tertiary">{t(`decouverte.tags.${coin.id}`)}</div>
                   </div>
                 </button>
               ))}
@@ -289,7 +287,7 @@ export default function CryptoDecouverte() {
                 onClick={() => goTo('montant')}
                 className="flex items-center gap-1.5 font-label text-sm text-secondary transition-colors hover:text-white"
               >
-                <ArrowLeft size={15} /> Modifier ma mise
+                <ArrowLeft size={15} /> {t('decouverte.asset.back')}
               </button>
             </div>
           </div>
@@ -309,15 +307,15 @@ export default function CryptoDecouverte() {
                 <Wallet size={18} className="text-tertiary" />
               </div>
               <h1 className="font-heading text-2xl font-semibold sm:text-3xl">
-                Voici ce que ça aurait donné
+                {t('decouverte.results.title')}
               </h1>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-secondary">
-                En plaçant{' '}
+                {t('decouverte.results.descriptionPrefix')}{' '}
                 <span className="text-white">
-                  {amount} {DEFAULT_CONFIG.currency} {FREQ_SENTENCE[frequency]}
+                  {amount} {DEFAULT_CONFIG.currency} {t(`decouverte.frequencySentence.${frequency}`)}
                 </span>{' '}
-                en <span className="text-white">{activeCoin.name}</span> depuis {startYear}, ton
-                portefeuille aurait suivi ces courbes. Zoome sur une période pour explorer.
+                {t('decouverte.results.descriptionMiddle')} <span className="text-white">{activeCoin.name}</span>{' '}
+                {t('decouverte.results.descriptionSuffix', { year: startYear })}
               </p>
             </div>
 
@@ -327,14 +325,14 @@ export default function CryptoDecouverte() {
             <div className="mt-10 flex flex-col items-center gap-4">
               <div className="flex flex-wrap justify-center gap-3">
                 <Button variant="outline" onClick={() => goTo('actif')}>
-                  <Repeat size={17} /> Tester une autre crypto
+                  <Repeat size={17} /> {t('decouverte.results.tryAnother')}
                 </Button>
                 <Button variant="outline" onClick={() => goTo('montant')}>
-                  <RotateCcw size={17} /> Recommencer
+                  <RotateCcw size={17} /> {t('decouverte.results.restart')}
                 </Button>
               </div>
               <Link to="/crypto" className="link-arrow">
-                <Maximize2 size={16} /> Ouvrir le simulateur complet
+                <Maximize2 size={16} /> {t('decouverte.results.openFull')}
               </Link>
             </div>
           </div>

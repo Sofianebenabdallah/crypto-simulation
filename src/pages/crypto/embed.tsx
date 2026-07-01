@@ -9,6 +9,7 @@
  */
 
 import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { parseEmbedParams } from '../../lib/crypto/queryParams';
 import { CryptoSimulator } from '../../components/simulators/crypto/CryptoSimulator';
@@ -24,6 +25,7 @@ import { CryptoSimulator } from '../../components/simulators/crypto/CryptoSimula
  * no site margins) for a clean iframe integration.
  */
 export default function CryptoSimulatorEmbed() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
   const cfg = useMemo(() => parseEmbedParams(params), [params]);
 
@@ -72,7 +74,7 @@ export default function CryptoSimulatorEmbed() {
   return (
     <div className="min-h-screen w-full bg-page-gradient font-body text-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8">
-        <h1 className="font-heading text-2xl font-semibold mb-6">Simulateur Crypto</h1>
+        <h1 className="font-heading text-2xl font-semibold mb-6">{t('crypto.embedTitle')}</h1>
         <CryptoSimulator initialInput={initialInput} readonly={cfg.readonly} />
       </div>
     </div>

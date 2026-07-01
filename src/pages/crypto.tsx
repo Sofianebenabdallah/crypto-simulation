@@ -9,8 +9,9 @@
  */
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Code2 } from 'lucide-react';
-import { PillBadge } from '../components/ui';
+import { PillBadge, LanguageSwitcher } from '../components/ui';
 import { CryptoSimulator } from '../components/simulators/crypto/CryptoSimulator';
 import { EmbedModal } from '../components/simulators/crypto/EmbedModal';
 
@@ -24,6 +25,7 @@ function shouldAutoOpenEmbed(): boolean {
 }
 
 export default function CryptoSimulatorPage() {
+  const { t } = useTranslation();
   const [embedOpen, setEmbedOpen] = useState(shouldAutoOpenEmbed);
 
   return (
@@ -31,15 +33,18 @@ export default function CryptoSimulatorPage() {
       {/* Decorative glow behind the hero, matching the landing page. */}
       <div className="glow-blue pointer-events-none absolute left-1/2 top-0 h-[520px] w-[820px] -translate-x-1/2" />
 
+      <div className="absolute right-4 top-4 z-30 sm:right-8 sm:top-6">
+        <LanguageSwitcher />
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16">
         <header className="flex flex-col items-center text-center gap-4 mb-12">
-          <PillBadge>Simulateur crypto</PillBadge>
+          <PillBadge>{t('crypto.badge')}</PillBadge>
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-[52px] font-semibold tracking-tight leading-[1.05] max-w-3xl">
-            Simulez un investissement crypto récurrent
+            {t('crypto.title')}
           </h1>
           <p className="text-secondary max-w-xl text-sm sm:text-base leading-relaxed">
-            Choisissez un actif, un montant et une fréquence, puis visualisez la performance d'une
-            stratégie DCA sur données de marché réelles — quantité acquise, capital final, gains et pertes.
+            {t('crypto.subtitle')}
           </p>
         </header>
 
@@ -47,7 +52,7 @@ export default function CryptoSimulatorPage() {
 
         <div className="mt-8 flex justify-center">
           <button type="button" onClick={() => setEmbedOpen(true)} className="link-arrow">
-            <Code2 size={16} /> Intégrer ce simulateur
+            <Code2 size={16} /> {t('crypto.embedButton')}
           </button>
         </div>
       </div>

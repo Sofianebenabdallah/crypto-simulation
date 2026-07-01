@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AlertTriangle, Loader2, Settings2, LineChart, TrendingUp, RotateCcw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Card, Button } from '../../ui';
 import { CryptoSimulatorForm } from './CryptoSimulatorForm';
 import { CryptoKeyFigures } from './CryptoKeyFigures';
@@ -49,13 +50,14 @@ function StatePanel({ children }: { children: React.ReactNode }) {
 }
 
 function ZoomReset({ onClick }: { onClick: () => void }) {
+  const { t } = useTranslation();
   return (
     <button
       type="button"
       onClick={onClick}
       className="flex items-center gap-1.5 rounded-full border border-primary bg-white/[0.04] px-3 py-1.5 font-label text-xs text-secondary transition-colors hover:border-white/25 hover:text-white"
     >
-      <RotateCcw size={13} /> Vue complète
+      <RotateCcw size={13} /> {t('simulator.fullView')}
     </button>
   );
 }
@@ -65,6 +67,7 @@ function ZoomReset({ onClick }: { onClick: () => void }) {
  * page and inside an iframe embed — it owns its state and data fetching.
  */
 export function CryptoSimulator({ initialInput, readonly, hideForm, className }: CryptoSimulatorProps) {
+  const { t } = useTranslation();
   const [input, setInput] = useState<SimulationInput>({
     assetId: initialInput?.assetId ?? DEFAULT_CONFIG.assetId,
     currency: initialInput?.currency ?? DEFAULT_CONFIG.currency,
@@ -97,7 +100,7 @@ export function CryptoSimulator({ initialInput, readonly, hideForm, className }:
         {/* Configuration */}
         {!hideForm && (
           <Card className="lg:col-span-5 xl:col-span-4 h-fit">
-            <SectionTitle icon={<Settings2 size={16} />}>Configuration</SectionTitle>
+            <SectionTitle icon={<Settings2 size={16} />}>{t('simulator.configuration')}</SectionTitle>
             <CryptoSimulatorForm value={input} onChange={patch} readonly={readonly} />
           </Card>
         )}
@@ -108,7 +111,7 @@ export function CryptoSimulator({ initialInput, readonly, hideForm, className }:
             <StatePanel>
               <Loader2 className="animate-spin text-secondary" size={30} />
               <span className="mt-3 font-label text-sm text-secondary">
-                Chargement des données de marché…
+                {t('simulator.loading')}
               </span>
             </StatePanel>
           )}
@@ -117,7 +120,7 @@ export function CryptoSimulator({ initialInput, readonly, hideForm, className }:
               <AlertTriangle className="text-danger" size={30} />
               <p className="mt-3 max-w-sm text-sm text-secondary">{error.message}</p>
               <Button variant="outline" className="mt-4" onClick={retry}>
-                Réessayer
+                {t('simulator.retry')}
               </Button>
             </StatePanel>
           )}
@@ -133,7 +136,7 @@ export function CryptoSimulator({ initialInput, readonly, hideForm, className }:
               icon={<LineChart size={16} />}
               action={zoomed ? <ZoomReset onClick={resetZoom} /> : undefined}
             >
-              Évolution du portefeuille
+              {t('simulator.portfolioEvolution')}
             </SectionTitle>
             <CryptoHistoryChart
               timeline={result.timeline}
@@ -148,7 +151,7 @@ export function CryptoSimulator({ initialInput, readonly, hideForm, className }:
               icon={<TrendingUp size={16} />}
               action={zoomed ? <ZoomReset onClick={resetZoom} /> : undefined}
             >
-              Gains / Pertes
+              {t('simulator.gainsLosses')}
             </SectionTitle>
             <CryptoProfitLossChart
               timeline={result.timeline}

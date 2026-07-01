@@ -30,6 +30,14 @@ Premier outil livré : simulateur crypto DCA, avec version intégrable par ifram
 - `storyloop-custom/ArchitectureTechnique.tsx` — board d'architecture (tech lead) : section 01 structure du dossier (`fileTree` de src/), 02 design system piloté par tokens (theme.css → échelle Tailwind color-mix 50→900 → components/ui, avec `codeCard` snippet scale()), 03 dossier crypto découplé (pipeline `techCard` cryptoApi→normalize→moteur pur→hook→UI + `codeCard` du swap `marketDataSource`), 04 routing par fichiers & intégration URL. Node types: brandHero, sectionTitle, fileTree, techCard, codeCard, note.
 - Home (`/`) référence le canva de présentation via `<a>` externe (CANVAS_URL labs.krisspy.ai/share/...) + carte vers `/crypto/decouverte`.
 - Sandbox canvas: uniquement imports `react`/`reactflow`/`lucide-react`/`react-router-dom`/`@krisspy/canvas`, styles inline, jamais d'import depuis `src/`.
+- **Canvas language policy**: French canvases (`PresentationProduit.tsx`, `ArchitectureTechnique.tsx`) STAY in French. English versions are separate DUPLICATE files (`PresentationProduitEN.tsx` → default export `PresentationProduitEN`; `ArchitectureTechniqueEN.tsx` → `ArchitectureTechniqueEN`) — never translate the originals in place, keep both in sync structurally.
+
+## Features — i18n (react-i18next)
+
+- Deps: `react-i18next` + `i18next` + `i18next-browser-languagedetector`. Config in `src/i18n/index.ts` (resources en/fr, fallbackLng 'en', detection order localStorage→navigator→htmlTag, cache localStorage key `i18nextLng`, interpolation escapeValue false). Imported in `src/main.tsx`.
+- Locales: `src/i18n/locales/en.json` + `fr.json`. Key namespaces: common, home, crypto, decouverte, simulator, embed, sinvestir, designSystem. Interpolation uses `{{var}}` (e.g. `embed.copy` = "Copy {{label}}").
+- All pages AND crypto simulator components use `useTranslation()`/`t()`. `chartShared.tsx` SERIES has NO `label` field — series labels resolved via `t('simulator.series.<dataKey>')` inside RichTooltip/ChartLegend.
+- `LanguageSwitcher` (`src/components/ui/LanguageSwitcher.tsx`, exported from ui barrel) — glass-card FR/EN dropdown (Globe + ChevronDown), calls `i18n.changeLanguage`. Placed top-right on `/`, `/crypto`, `/designsystem` (absolute) and in the `/sinvestir` header nav. NOT on `/crypto/embed` (chrome-less embed).
 
 ## Features — Crypto Simulator
 

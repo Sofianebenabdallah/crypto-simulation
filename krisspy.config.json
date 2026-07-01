@@ -31,10 +31,5 @@
     "userId": "oGxOsuDTWcfzrZ3RG9Cku",
     "acquiredAt": "2026-07-01T19:29:58.936Z",
     "hostname": "MacIntel"
-  },
-  "custom": {
-    "runtime": "vm",
-    "vmUrl": "http://localhost:63824",
-    "vmUrlVerifiedAt": "2026-07-01T21:43:51.274Z"
   }
 }

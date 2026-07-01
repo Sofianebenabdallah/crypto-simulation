@@ -10,12 +10,13 @@
  */
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Search, Check, Info, AlertTriangle, X, Star,
   Save, Share2, Gift, ArrowRight, Play, ChevronDown,
 } from 'lucide-react';
 import {
-  Badge, Button, Card, GlassCard, LinkArrow, PillBadge, SoonBadge, StatTile, StepChip,
+  Badge, Button, Card, GlassCard, LanguageSwitcher, LinkArrow, PillBadge, SoonBadge, StatTile, StepChip,
 } from '../components/ui';
 
 /**
@@ -25,28 +26,31 @@ import {
  * Edit a CSS variable and every block below updates live.
  */
 export default function DesignSystem() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen w-full bg-page-gradient font-body text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 py-12 sm:py-16">
 
         <header className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <PillBadge className="mb-4">Design System</PillBadge>
+            <PillBadge className="mb-4">{t('designSystem.badge')}</PillBadge>
             <h1 className="font-heading text-3xl sm:text-5xl font-semibold tracking-tight">
-              S’investir — tokens &amp; composants
+              {t('designSystem.title')}
             </h1>
             <p className="text-secondary text-sm mt-3 max-w-xl">
-              Tokens dans <code className="font-label text-secondary">theme.css</code>,
-              composants dans <code className="font-label text-secondary">src/components/ui</code>.
+              {t('designSystem.subtitlePrefix')} <code className="font-label text-secondary">theme.css</code>{t('designSystem.subtitleMiddle')} <code className="font-label text-secondary">src/components/ui</code>.
             </p>
           </div>
-          <span className="inline-flex items-center gap-2 text-xs font-label text-secondary">
-            <span className="w-2 h-2 rounded-full bg-success" /> live preview
-          </span>
+          <div className="flex flex-col items-end gap-3">
+            <LanguageSwitcher />
+            <span className="inline-flex items-center gap-2 text-xs font-label text-secondary">
+              <span className="w-2 h-2 rounded-full bg-success" /> {t('designSystem.livePreview')}
+            </span>
+          </div>
         </header>
 
         {/* ── Palettes ─────────────────────────────────────────────────── */}
-        <SectionTitle>Couleurs</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.colors')}</SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-14">
           <PaletteCard label="Primary"   token="--primary"   tone="primary"   />
           <PaletteCard label="Secondary" token="--secondary" tone="secondary" />
@@ -55,56 +59,56 @@ export default function DesignSystem() {
         </div>
 
         {/* ── Typography ───────────────────────────────────────────────── */}
-        <SectionTitle>Typographie</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.typography')}</SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-14">
           <Card>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-secondary font-label">Heading &amp; Body</span>
+              <span className="text-sm text-secondary font-label">{t('designSystem.typography.headingBody')}</span>
               <span className="text-sm text-secondary font-label">Plus Jakarta Sans</span>
             </div>
-            <p className="font-heading text-5xl font-semibold mb-2">Chiffrez vos décisions</p>
+            <p className="font-heading text-5xl font-semibold mb-2">{t('designSystem.typography.headingSample')}</p>
             <p className="text-secondary">
-              Simulez, enregistrez et partagez vos calculs d’investissement en quelques clics.
+              {t('designSystem.typography.bodySample')}
             </p>
           </Card>
           <Card>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-secondary font-label">Label / Boutons</span>
+              <span className="text-sm text-secondary font-label">{t('designSystem.typography.labelButtons')}</span>
               <span className="text-sm text-secondary font-label">Lexend</span>
             </div>
-            <p className="font-label text-4xl font-light mb-2">Démarrer gratuitement</p>
-            <p className="font-label text-secondary font-light">Lexend Light 300 — utilisé sur tous les CTA.</p>
+            <p className="font-label text-4xl font-light mb-2">{t('designSystem.typography.labelSample')}</p>
+            <p className="font-label text-secondary font-light">{t('designSystem.typography.labelNote')}</p>
           </Card>
         </div>
 
         {/* ── Badges / labels ──────────────────────────────────────────── */}
-        <SectionTitle>Labels de section</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.sectionLabels')}</SectionTitle>
         <Card className="mb-14 flex flex-wrap gap-4 items-center">
-          <PillBadge>Nos simulateurs</PillBadge>
-          <PillBadge>Comment ça marche ?</PillBadge>
-          <PillBadge>Rejoignez-nous</PillBadge>
-          <PillBadge>FAQ</PillBadge>
+          <PillBadge>{t('designSystem.pills.simulators')}</PillBadge>
+          <PillBadge>{t('designSystem.pills.howItWorks')}</PillBadge>
+          <PillBadge>{t('designSystem.pills.joinUs')}</PillBadge>
+          <PillBadge>{t('designSystem.pills.faq')}</PillBadge>
         </Card>
 
         {/* ── Buttons ──────────────────────────────────────────────────── */}
-        <SectionTitle>Boutons &amp; liens</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.buttons')}</SectionTitle>
         <Card className="mb-14 flex flex-wrap items-center gap-5">
-          <Button size="lg">Démarrer gratuitement</Button>
-          <Button>Créer un compte</Button>
-          <Button variant="outline">Se connecter <ArrowRight size={15} /></Button>
-          <LinkArrow>Découvrir les simulateurs</LinkArrow>
+          <Button size="lg">{t('designSystem.buttons.startFree')}</Button>
+          <Button>{t('designSystem.buttons.createAccount')}</Button>
+          <Button variant="outline">{t('designSystem.buttons.login')} <ArrowRight size={15} /></Button>
+          <LinkArrow>{t('designSystem.buttons.discover')}</LinkArrow>
         </Card>
 
         {/* ── Cards ────────────────────────────────────────────────────── */}
-        <SectionTitle>Cartes &amp; panneaux</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.cards')}</SectionTitle>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-14">
           <Card active className="rounded-token">
             <div className="flex gap-4">
               <StepChip>1</StepChip>
               <div>
-                <h3 className="text-xl mb-1">Simulez ou comparez</h3>
+                <h3 className="text-xl mb-1">{t('designSystem.cards.step1Title')}</h3>
                 <p className="text-secondary text-sm">
-                  Choisissez un simulateur ou un comparateur et lancez votre calcul.
+                  {t('designSystem.cards.step1Desc')}
                 </p>
               </div>
             </div>
@@ -115,9 +119,9 @@ export default function DesignSystem() {
             <div className="flex gap-4">
               <StepChip>2</StepChip>
               <div>
-                <h3 className="text-xl mb-1 text-white/70">Sauvegardez</h3>
+                <h3 className="text-xl mb-1 text-white/70">{t('designSystem.cards.step2Title')}</h3>
                 <p className="text-white/50 text-sm">
-                  Gardez vos calculs dans votre espace personnel.
+                  {t('designSystem.cards.step2Desc')}
                 </p>
               </div>
             </div>
@@ -125,13 +129,13 @@ export default function DesignSystem() {
           </Card>
 
           <GlassCard active className="p-6 flex items-center justify-between">
-            <span className="text-white/90">Est-ce que les simulateurs sont gratuits ?</span>
+            <span className="text-white/90">{t('designSystem.cards.faqSample')}</span>
             <ChevronDown size={20} className="text-secondary" />
           </GlassCard>
         </div>
 
         {/* ── Stat tiles ───────────────────────────────────────────────── */}
-        <SectionTitle>Compteurs</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.counters')}</SectionTitle>
         <div className="mb-14">
           <div className="flex flex-wrap gap-3 justify-center">
             {['2', '5', '6', '3', '6'].map((d, i) => (
@@ -140,35 +144,35 @@ export default function DesignSystem() {
               </StatTile>
             ))}
           </div>
-          <p className="text-center mt-4 text-lg font-medium tracking-wide">UTILISATEURS INSCRITS</p>
+          <p className="text-center mt-4 text-lg font-medium tracking-wide">{t('designSystem.counters.label')}</p>
 
           <div className="flex flex-wrap justify-center gap-16 mt-10">
-            <Stat value="+ 40k" label="simulations créées" />
-            <Stat value="8" label="simulateurs disponibles" />
-            <Stat value="8" label="comparateurs disponibles" />
+            <Stat value="+ 40k" label={t('designSystem.counters.simulationsCreated')} />
+            <Stat value="8" label={t('designSystem.counters.simulatorsAvailable')} />
+            <Stat value="8" label={t('designSystem.counters.comparatorsAvailable')} />
           </div>
         </div>
 
         {/* ── Icons + feature list ─────────────────────────────────────── */}
-        <SectionTitle>Icônes &amp; listes</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.iconsLists')}</SectionTitle>
         <Card className="mb-14 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-4">
           {[
-            { icon: Save, text: 'Sauvegardez vos simulations' },
-            { icon: Share2, text: 'Partagez vos résultats' },
-            { icon: Gift, text: 'Outils gratuits' },
-            { icon: Check, text: 'Données accessibles à tout moment' },
-          ].map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-3">
+            { icon: Save, key: 'save' },
+            { icon: Share2, key: 'share' },
+            { icon: Gift, key: 'free' },
+            { icon: Check, key: 'anytime' },
+          ].map(({ icon: Icon, key }) => (
+            <div key={key} className="flex items-center gap-3">
               <span className="w-9 h-9 rounded-full flex items-center justify-center bg-primary/25 border border-secondary/30 text-secondary">
                 <Icon size={18} />
               </span>
-              <span className="text-white/80">{text}</span>
+              <span className="text-white/80">{t(`designSystem.features.${key}`)}</span>
             </div>
           ))}
         </Card>
 
         {/* ── Alerts + form ────────────────────────────────────────────── */}
-        <SectionTitle>Alertes &amp; formulaires</SectionTitle>
+        <SectionTitle>{t('designSystem.sections.alertsForms')}</SectionTitle>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <AlertsCard />
           <FormCard />
@@ -228,11 +232,12 @@ function PaletteCard({ label, token, tone }: { label: string; token: string; ton
 }
 
 function AlertsCard() {
+  const { t } = useTranslation();
   const items = [
-    { icon: Check,         title: 'Success', msg: 'Votre simulation a été sauvegardée.', tone: 'success' as const },
-    { icon: Info,          title: 'Info',    msg: 'Un nouveau simulateur est disponible.', tone: 'info' as const },
-    { icon: AlertTriangle, title: 'Warning', msg: 'Pensez à vérifier vos hypothèses.',   tone: 'warning' as const },
-    { icon: X,             title: 'Error',   msg: 'Une erreur est survenue.',             tone: 'danger' as const },
+    { icon: Check,         title: 'Success', msg: t('designSystem.alerts.successMsg'), tone: 'success' as const },
+    { icon: Info,          title: 'Info',    msg: t('designSystem.alerts.infoMsg'),    tone: 'info' as const },
+    { icon: AlertTriangle, title: 'Warning', msg: t('designSystem.alerts.warningMsg'), tone: 'warning' as const },
+    { icon: X,             title: 'Error',   msg: t('designSystem.alerts.errorMsg'),   tone: 'danger' as const },
   ];
   const palette: Record<string, { bg: string; text: string; border: string }> = {
     success: { bg: 'bg-success/10', text: 'text-success', border: 'border-success/30' },
@@ -243,8 +248,8 @@ function AlertsCard() {
   return (
     <Card className="!p-6">
       <div className="flex items-baseline justify-between mb-3">
-        <span className="font-heading font-semibold">Alerts</span>
-        <span className="text-xs font-label text-secondary">Status messages</span>
+        <span className="font-heading font-semibold">{t('designSystem.alerts.title')}</span>
+        <span className="text-xs font-label text-secondary">{t('designSystem.alerts.subtitle')}</span>
       </div>
       <div className="flex flex-col gap-2">
         {items.map(({ icon: Icon, title, msg, tone }) => {
@@ -265,21 +270,22 @@ function AlertsCard() {
 }
 
 function FormCard() {
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   return (
     <Card className="!p-6">
       <div className="flex items-baseline justify-between mb-4">
-        <span className="font-heading font-semibold">Form</span>
-        <span className="text-xs font-label text-secondary">Inputs + actions</span>
+        <span className="font-heading font-semibold">{t('designSystem.form.title')}</span>
+        <span className="text-xs font-label text-secondary">{t('designSystem.form.subtitle')}</span>
       </div>
       <div className="flex flex-col gap-3">
-        <label className="text-xs font-label text-secondary">Nom complet</label>
+        <label className="text-xs font-label text-secondary">{t('designSystem.form.fullName')}</label>
         <div className="flex items-center gap-2 input">
           <Search size={16} className="text-white/40" />
           <input
             value={name}
             onChange={e => setName(e.target.value)}
-            placeholder="Rechercher un simulateur"
+            placeholder={t('designSystem.form.searchPlaceholder')}
             className="bg-transparent outline-none text-sm flex-1 font-label placeholder:text-white/40 text-white"
           />
         </div>
@@ -291,8 +297,8 @@ function FormCard() {
           <SoonBadge />
         </div>
         <div className="flex gap-3 mt-3">
-          <Button><Star size={14} /> Enregistrer</Button>
-          <Button variant="outline"><Play size={14} /> Aperçu</Button>
+          <Button><Star size={14} /> {t('designSystem.form.save')}</Button>
+          <Button variant="outline"><Play size={14} /> {t('designSystem.form.preview')}</Button>
         </div>
       </div>
     </Card>

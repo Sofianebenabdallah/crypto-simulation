@@ -1,20 +1,19 @@
+import { useTranslation } from 'react-i18next';
 import { formatCurrency, formatDateShort, formatNumber } from '../../../lib/crypto/format';
 
-/** Series colour + formatter registry, keyed by dataKey. */
+/** Series colour + formatter registry, keyed by dataKey. Labels come from i18n (simulator.series.*). */
 export const SERIES: Record<
   string,
-  { label: string; color: string; fmt: (v: number, ctx: ChartCtx) => string }
+  { color: string; fmt: (v: number, ctx: ChartCtx) => string }
 > = {
-  value: { label: 'Valeur', color: 'var(--secondary)', fmt: (v, c) => formatCurrency(v, c.currency) },
-  invested: { label: 'Investi', color: 'var(--tertiary)', fmt: (v, c) => formatCurrency(v, c.currency) },
+  value: { color: 'var(--secondary)', fmt: (v, c) => formatCurrency(v, c.currency) },
+  invested: { color: 'var(--tertiary)', fmt: (v, c) => formatCurrency(v, c.currency) },
   quantity: {
-    label: 'Acquis',
     color: 'var(--warning)',
     fmt: (v, c) => `${formatNumber(v, 2)}${c.symbol ? ` ${c.symbol}` : ''}`,
   },
-  price: { label: 'Prix', color: 'rgba(255,255,255,0.55)', fmt: (v, c) => formatCurrency(v, c.currency, 2) },
+  price: { color: 'rgba(255,255,255,0.55)', fmt: (v, c) => formatCurrency(v, c.currency, 2) },
   profitLoss: {
-    label: 'Gains / Pertes',
     color: 'var(--success)',
     fmt: (v, c) => formatCurrency(v, c.currency),
   },
@@ -44,6 +43,7 @@ export const BRUSH_BASE = {
 
 /** Rich glass tooltip listing every active series with a coloured dot. */
 export function RichTooltip({ active, payload, label, ctx }: any) {
+  const { t } = useTranslation();
   if (!active || !payload?.length) return null;
   return (
     <div className="glass-card px-3.5 py-2.5 text-sm shadow-xl" style={{ minWidth: 170 }}>
@@ -63,7 +63,7 @@ export function RichTooltip({ active, payload, label, ctx }: any) {
               <div key={p.dataKey} className="flex items-center justify-between gap-4">
                 <span className="flex items-center gap-2 text-secondary">
                   <span className="w-2 h-2 rounded-full" style={{ background: color }} />
-                  {meta.label}
+                  {t(`simulator.series.${p.dataKey}`)}
                 </span>
                 <b style={{ color: isPL ? color : 'var(--text-primary)' }}>{meta.fmt(p.value, ctx)}</b>
               </div>
@@ -76,6 +76,7 @@ export function RichTooltip({ active, payload, label, ctx }: any) {
 
 /** Small legend chip row rendered above a chart. */
 export function ChartLegend({ items }: { items: { dataKey: string; label?: string }[] }) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-3">
       {items.map((it) => {
@@ -83,7 +84,7 @@ export function ChartLegend({ items }: { items: { dataKey: string; label?: strin
         return (
           <span key={it.dataKey} className="flex items-center gap-1.5 font-label text-xs text-secondary">
             <span className="w-2.5 h-2.5 rounded-full" style={{ background: meta.color }} />
-            {it.label ?? meta.label}
+            {it.label ?? t(`simulator.series.${it.dataKey}`)}
           </span>
         );
       })}

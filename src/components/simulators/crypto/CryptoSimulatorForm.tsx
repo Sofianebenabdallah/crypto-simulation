@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { SUPPORTED_ASSETS } from '../../../lib/crypto/assets';
 import type { Frequency, SimulationInput } from '../../../types/crypto';
 import { AssetCombobox } from './AssetCombobox';
@@ -8,11 +9,7 @@ interface Props {
   readonly?: boolean;
 }
 
-const FREQUENCIES: { value: Frequency; label: string }[] = [
-  { value: 'daily', label: 'Quotidien' },
-  { value: 'weekly', label: 'Hebdomadaire' },
-  { value: 'monthly', label: 'Mensuel' },
-];
+const FREQUENCIES: Frequency[] = ['daily', 'weekly', 'monthly'];
 
 const CURRENCIES = ['EUR', 'USD'];
 
@@ -27,11 +24,12 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 /** Configuration block — asset, amount, frequency, date range. */
 export function CryptoSimulatorForm({ value, onChange, readonly }: Props) {
+  const { t } = useTranslation();
   const disabled = !!readonly;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <Field label="Actif numérique">
+      <Field label={t('simulator.form.asset')}>
         <AssetCombobox
           assets={SUPPORTED_ASSETS}
           value={value.assetId}
@@ -40,7 +38,7 @@ export function CryptoSimulatorForm({ value, onChange, readonly }: Props) {
         />
       </Field>
 
-      <Field label="Montant par opération">
+      <Field label={t('simulator.form.amountPerOperation')}>
         <div className="relative">
           <input
             type="number"
@@ -66,7 +64,7 @@ export function CryptoSimulatorForm({ value, onChange, readonly }: Props) {
         </div>
       </Field>
 
-      <Field label="Fréquence d'investissement">
+      <Field label={t('simulator.form.frequency')}>
         <select
           className="input font-body"
           value={value.frequency}
@@ -74,15 +72,15 @@ export function CryptoSimulatorForm({ value, onChange, readonly }: Props) {
           onChange={(e) => onChange({ frequency: e.target.value as Frequency })}
         >
           {FREQUENCIES.map((f) => (
-            <option key={f.value} value={f.value} className="bg-[#030B1F]">
-              {f.label}
+            <option key={f} value={f} className="bg-[#030B1F]">
+              {t(`simulator.form.frequencies.${f}`)}
             </option>
           ))}
         </select>
       </Field>
 
       <div className="grid grid-cols-2 gap-4">
-        <Field label="Date de début">
+        <Field label={t('simulator.form.startDate')}>
           <input
             type="date"
             className="input"
@@ -92,7 +90,7 @@ export function CryptoSimulatorForm({ value, onChange, readonly }: Props) {
             onChange={(e) => onChange({ start: e.target.value })}
           />
         </Field>
-        <Field label="Date de fin">
+        <Field label={t('simulator.form.endDate')}>
           <input
             type="date"
             className="input"

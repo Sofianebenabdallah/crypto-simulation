@@ -1,0 +1,402 @@
+{
+  "common": {
+    "login": "Se connecter",
+    "createAccount": "Créer un compte",
+    "startFree": "Démarrer gratuitement",
+    "language": "Langue"
+  },
+  "home": {
+    "badge": "Suite S'investir",
+    "title": "Une suite d'outils pour chiffrer vos décisions d'investissement",
+    "subtitle": "Ce projet transpose les simulateurs S'investir dans une interface unifiée, sombre et intégrable. Choisissez une destination ci-dessous — chaque page a un rôle précis.",
+    "openCanvas": "Ouvrir le canva",
+    "footerNote": "Le simulateur crypto est intégrable via iframe — ouvrez-le puis cliquez sur « Intégrer ce simulateur ».",
+    "canvases": {
+      "presentation": {
+        "badge": "Présentation produit",
+        "title": "Le projet expliqué de bout en bout",
+        "description": "Un canva interactif présente tout le projet comme le ferait un product manager : la marque, le design system, les pages et le parcours découverte, avec des aperçus live de chaque écran."
+      },
+      "architecture": {
+        "badge": "Architecture technique",
+        "title": "Comment le projet est construit",
+        "description": "La vue tech lead : structure du dossier, design system piloté par tokens et couche de données découplée — pour changer d’API sans rien casser."
+      }
+    },
+    "destinations": {
+      "crypto": {
+        "badge": "Simulateur",
+        "title": "Simulateur crypto DCA",
+        "description": "Simulez un investissement récurrent (Dollar Cost Averaging) sur un actif crypto à partir de données de marché réelles.",
+        "points": [
+          "Actif, montant, fréquence et période configurables",
+          "Chiffres clés : capital, quantité, prix moyen, gains/pertes",
+          "Graphiques historique & gains/pertes avec zoom temporel"
+        ],
+        "cta": "Ouvrir le simulateur"
+      },
+      "decouverte": {
+        "badge": "Onboarding",
+        "title": "Parcours découverte",
+        "description": "Une version guidée du simulateur crypto : on onboarde pas à pas un utilisateur qui découvre le DCA, sans jargon.",
+        "points": [
+          "Trois étapes : la mise, la crypto, le résultat",
+          "Top 5 des cryptos à choisir en un clic",
+          "Chaque étape vit dans l’URL — rejouable et intégrable"
+        ],
+        "cta": "Lancer le parcours"
+      },
+      "sinvestir": {
+        "badge": "Landing",
+        "title": "Landing page S'investir",
+        "description": "La page vitrine de la suite : positionnement, présentation des outils et appels à l'action.",
+        "points": [
+          "Structure marketing complète",
+          "Sert de référence de design pour les autres pages"
+        ],
+        "cta": "Voir la landing"
+      },
+      "designsystem": {
+        "badge": "Design",
+        "title": "Design System",
+        "description": "Le guide de style vivant : couleurs, typographie, composants et tokens partagés par tout le projet.",
+        "points": [
+          "Tokens de thème (theme.css) et échelle 50→900",
+          "Composants UI réutilisables (boutons, cartes, badges…)",
+          "Aperçu live — modifier un token met tout à jour"
+        ],
+        "cta": "Explorer le design system"
+      }
+    }
+  },
+  "crypto": {
+    "badge": "Simulateur crypto",
+    "title": "Simulez un investissement crypto récurrent",
+    "subtitle": "Choisissez un actif, un montant et une fréquence, puis visualisez la performance d'une stratégie DCA sur données de marché réelles — quantité acquise, capital final, gains et pertes.",
+    "embedButton": "Intégrer ce simulateur",
+    "embedTitle": "Simulateur Crypto"
+  },
+  "decouverte": {
+    "badge": "Mode découverte",
+    "steps": {
+      "amount": "Ta mise",
+      "asset": "Ta crypto",
+      "results": "Le résultat"
+    },
+    "frequencies": {
+      "daily": "Chaque jour",
+      "weekly": "Chaque semaine",
+      "monthly": "Chaque mois"
+    },
+    "frequencySentence": {
+      "daily": "chaque jour",
+      "weekly": "chaque semaine",
+      "monthly": "chaque mois"
+    },
+    "tags": {
+      "bitcoin": "La référence",
+      "ethereum": "Smart contracts",
+      "binancecoin": "Écosystème Binance",
+      "solana": "Rapide & scalable",
+      "ripple": "Paiements"
+    },
+    "amount": {
+      "title": "Et si tu avais investi un peu, régulièrement ?",
+      "description": "Ce simulateur remonte le temps : il te montre ce qu'une petite somme placée régulièrement dans une crypto aurait donné aujourd'hui — sans tout miser d'un coup.",
+      "amountLabel": "Quelle somme aurais-tu pu mettre à chaque fois ?",
+      "rhythmLabel": "À quel rythme ?",
+      "continue": "Continuer"
+    },
+    "asset": {
+      "title": "Sur quelle crypto veux-tu tester ?",
+      "descriptionPrefix": "Choisis l'une des cryptos les plus connues. On calculera ce que",
+      "descriptionSuffix": "auraient donné.",
+      "back": "Modifier ma mise"
+    },
+    "results": {
+      "title": "Voici ce que ça aurait donné",
+      "descriptionPrefix": "En plaçant",
+      "descriptionMiddle": "en",
+      "descriptionSuffix": "depuis {{year}}, ton portefeuille aurait suivi ces courbes. Zoome sur une période pour explorer.",
+      "tryAnother": "Tester une autre crypto",
+      "restart": "Recommencer",
+      "openFull": "Ouvrir le simulateur complet"
+    }
+  },
+  "simulator": {
+    "configuration": "Configuration",
+    "loading": "Chargement des données de marché…",
+    "retry": "Réessayer",
+    "fullView": "Vue complète",
+    "portfolioEvolution": "Évolution du portefeuille",
+    "gainsLosses": "Gains / Pertes",
+    "form": {
+      "asset": "Actif numérique",
+      "amountPerOperation": "Montant par opération",
+      "frequency": "Fréquence d'investissement",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "frequencies": {
+        "daily": "Quotidien",
+        "weekly": "Hebdomadaire",
+        "monthly": "Mensuel"
+      }
+    },
+    "combobox": {
+      "select": "Sélectionner un actif",
+      "search": "Rechercher un actif…",
+      "empty": "Aucun actif trouvé"
+    },
+    "keyFigures": {
+      "finalCapital": "Capital final",
+      "gains": "de gains",
+      "losses": "de pertes",
+      "totalInvested": "Total investi",
+      "quantityAcquired": "Quantité acquise",
+      "avgPrice": "Prix moyen d'achat",
+      "daysSimulated": "Jours simulés"
+    },
+    "series": {
+      "value": "Valeur",
+      "invested": "Investi",
+      "quantity": "Acquis",
+      "price": "Prix",
+      "profitLoss": "Gains / Pertes"
+    }
+  },
+  "embed": {
+    "title": "Intégrer le simulateur",
+    "subtitle": "Configurez l'affichage, copiez le code puis collez-le sur votre site.",
+    "close": "Fermer",
+    "theme": "Thème",
+    "themeDark": "Sombre",
+    "themeLight": "Clair",
+    "height": "Hauteur (px)",
+    "lockFields": "Verrouiller les champs",
+    "lockFieldsHint": " — les visiteurs voient le résultat sans pouvoir modifier",
+    "directLink": "Lien direct",
+    "iframeCode": "Code d'intégration (iframe)",
+    "openNewTab": "Ouvrir dans un nouvel onglet",
+    "preview": "Aperçu",
+    "copy": "Copier {{label}}"
+  },
+  "sinvestir": {
+    "hero": {
+      "badge": "Les simulateurs S’investir",
+      "title": "Les simulateurs et comparateurs financiers pour chiffrer vos décisions",
+      "subtitle": "Simulez, enregistrez et partagez vos calculs d’investissement en quelques clics. Accédez à des outils clairs, fiables et totalement gratuits !",
+      "startFree": "Démarrer gratuitement",
+      "discover": "Découvrir les simulateurs",
+      "heroAlt": "Aperçu des simulateurs S'investir"
+    },
+    "features": {
+      "save": "Sauvegardez vos simulations",
+      "share": "Partagez vos résultats",
+      "free": "Outils gratuits",
+      "anytime": "Données accessibles à tout moment"
+    },
+    "community": {
+      "badge": "Rejoignez-nous",
+      "title": "Une communauté d’investisseurs qui grandit chaque jour",
+      "label": "UTILISATEURS INSCRITS"
+    },
+    "howItWorks": {
+      "badge": "Comment ça marche ?",
+      "title": "Vos simulations, du calcul au partage",
+      "cta": "Commencer une simulation",
+      "steps": [
+        {
+          "title": "Simulez ou comparez",
+          "desc": "Choisissez un simulateur ou un comparateur, et commencez votre simulation."
+        },
+        {
+          "title": "Sauvegardez votre simulation",
+          "desc": "Gardez vos calculs dans votre espace personnel pour les retrouver plus tard."
+        },
+        {
+          "title": "Partagez vos résultats",
+          "desc": "Diffusez un lien clair de vos hypothèses et résultats en quelques clics."
+        }
+      ],
+      "illustrationAlt": "Illustration du parcours de simulation"
+    },
+    "toolbox": {
+      "title": "La boîte à outils de la communauté S’investir",
+      "description": "Des simulateurs clairs et des comparateurs détaillés, pensés pour prendre de meilleures décisions avec un compte gratuit pour centraliser, sauvegarder et partager vos simulations.",
+      "cta": "Créer un compte gratuitement",
+      "registeredNote": "Déjà plus de 25 636 inscrits !",
+      "appAlt": "Application S'investir",
+      "playVideo": "Lire la vidéo",
+      "stats": {
+        "simulationsCreated": "simulations créées",
+        "simulatorsAvailable": "simulateurs disponibles",
+        "comparatorsAvailable": "comparateurs disponibles"
+      }
+    },
+    "simulators": {
+      "badge": "Nos simulateurs",
+      "title": "Accédez à tous nos simulateurs",
+      "cta": "Lancez votre première simulation",
+      "itemAlt": "Simulateur {{index}}"
+    },
+    "comparators": {
+      "badge": "Nos comparateurs",
+      "title": "Comparez avant de faire un choix",
+      "cta": "Essayez nos comparateurs",
+      "items": {
+        "pea": {
+          "title": "Comparateur PEA",
+          "desc": "Quel courtier choisir pour ouvrir votre PEA ? Ce comparateur analyse pour vous les meilleures offres du marché selon plus de 40 critères."
+        },
+        "cto": {
+          "title": "Comparateur CTO",
+          "desc": "Quel courtier choisir pour ouvrir un compte-titres ? Ce comparateur analyse les offres selon les frais, les produits, les services et la qualité globale."
+        },
+        "assuranceVie": {
+          "title": "Comparateur Assurance-Vie",
+          "desc": "Quelle assurance-vie choisir ? Ce comparateur analyse les meilleures offres selon les frais, les fonds euros, les unités de compte et la qualité de service."
+        },
+        "per": {
+          "title": "Comparateur PER",
+          "desc": "Quel PER choisir ? Ce comparateur analyse les offres selon les frais, les fonds euros, les unités de compte et la qualité globale."
+        },
+        "scpi": {
+          "title": "Comparateur SCPI",
+          "desc": "Quelles SCPI choisir ? Ce comparateur identifie les SCPI les plus performantes pour maximiser votre rendement."
+        },
+        "crypto": {
+          "title": "Comparateur Crypto",
+          "desc": "Quelle plateforme de crypto-actifs choisir ? Ce comparateur analyse les offres selon l'accessibilité, les fonctionnalités, les frais et la sécurité."
+        },
+        "bank": {
+          "title": "Comparateur Banque en ligne",
+          "desc": "Quelle est la meilleure banque en ligne et celle qui vous correspond le plus ?"
+        },
+        "proBank": {
+          "title": "Comparateur Banque en ligne professionnelle",
+          "desc": "Quelle banque en ligne pro choisir pour votre entreprise ?"
+        },
+        "etf": {
+          "title": "Comparateur meilleurs ETF",
+          "desc": "Quels ETF choisir ? Ce comparateur rassemble une sélection d'ETF selon la catégorie, les frais, l'encours, le PEA et le mode de réplication."
+        }
+      }
+    },
+    "faq": {
+      "badge": "FAQ",
+      "title": "Questions fréquentes",
+      "items": [
+        {
+          "q": "Est-ce que les simulateurs sont gratuits ?",
+          "a": "Oui, tous nos simulateurs et comparateurs sont accessibles gratuitement et sans limite."
+        },
+        {
+          "q": "Pourquoi créer un compte ?",
+          "a": "Un compte gratuit vous permet de sauvegarder vos simulations, les retrouver plus tard et les partager en un lien."
+        },
+        {
+          "q": "Mes données sont-elles publiques ?",
+          "a": "Non. Vos simulations restent privées ; vous seul décidez de partager un résultat via un lien."
+        },
+        {
+          "q": "Les résultats sont-ils « garantis » ?",
+          "a": "Les résultats sont purement indicatifs et pédagogiques. Ils ne constituent pas un conseil en investissement."
+        },
+        {
+          "q": "De nouveaux simulateurs vont arriver ?",
+          "a": "Oui, de nouveaux outils sont ajoutés régulièrement en fonction des besoins de la communauté."
+        },
+        {
+          "q": "Ces simulateurs sont-ils adaptés aux débutants ?",
+          "a": "Absolument. Chaque outil est pensé pour être clair et accessible, quel que soit votre niveau."
+        },
+        {
+          "q": "Combien de temps faut-il pour faire une simulation ?",
+          "a": "Quelques minutes suffisent : saisissez vos hypothèses et obtenez un résultat immédiat."
+        }
+      ]
+    },
+    "footer": {
+      "disclaimer": "Les simulateurs proposés sont mis à disposition gratuitement, à des fins exclusivement pédagogiques et informatives. Ils ont pour but d’aider les utilisateurs à mieux comprendre certaines notions ou à estimer des situations selon les informations saisies. Ils ne constituent en aucun cas un conseil en investissement, en fiscalité ou une recommandation personnalisée. Investir comporte des risques, y compris de perte en capital. Les performances passées ne préjugent en rien des performances futures. Les résultats obtenus sont purement indicatifs et doivent être analysés avec discernement.",
+      "copyright": "Copyright © 2026 S’investir | Création Pulsion Studio",
+      "links": {
+        "cookies": "Cookies",
+        "terms": "CGVU",
+        "legal": "Mentions légales",
+        "privacy": "Politique de confidentialité"
+      }
+    }
+  },
+  "designSystem": {
+    "badge": "Design System",
+    "title": "S’investir — tokens & composants",
+    "subtitlePrefix": "Tokens dans",
+    "subtitleMiddle": ", composants dans",
+    "livePreview": "live preview",
+    "sections": {
+      "colors": "Couleurs",
+      "typography": "Typographie",
+      "sectionLabels": "Labels de section",
+      "buttons": "Boutons & liens",
+      "cards": "Cartes & panneaux",
+      "counters": "Compteurs",
+      "iconsLists": "Icônes & listes",
+      "alertsForms": "Alertes & formulaires"
+    },
+    "typography": {
+      "headingBody": "Heading & Body",
+      "headingSample": "Chiffrez vos décisions",
+      "bodySample": "Simulez, enregistrez et partagez vos calculs d’investissement en quelques clics.",
+      "labelButtons": "Label / Boutons",
+      "labelSample": "Démarrer gratuitement",
+      "labelNote": "Lexend Light 300 — utilisé sur tous les CTA."
+    },
+    "pills": {
+      "simulators": "Nos simulateurs",
+      "howItWorks": "Comment ça marche ?",
+      "joinUs": "Rejoignez-nous",
+      "faq": "FAQ"
+    },
+    "buttons": {
+      "startFree": "Démarrer gratuitement",
+      "createAccount": "Créer un compte",
+      "login": "Se connecter",
+      "discover": "Découvrir les simulateurs"
+    },
+    "cards": {
+      "step1Title": "Simulez ou comparez",
+      "step1Desc": "Choisissez un simulateur ou un comparateur et lancez votre calcul.",
+      "step2Title": "Sauvegardez",
+      "step2Desc": "Gardez vos calculs dans votre espace personnel.",
+      "faqSample": "Est-ce que les simulateurs sont gratuits ?"
+    },
+    "counters": {
+      "label": "UTILISATEURS INSCRITS",
+      "simulationsCreated": "simulations créées",
+      "simulatorsAvailable": "simulateurs disponibles",
+      "comparatorsAvailable": "comparateurs disponibles"
+    },
+    "features": {
+      "save": "Sauvegardez vos simulations",
+      "share": "Partagez vos résultats",
+      "free": "Outils gratuits",
+      "anytime": "Données accessibles à tout moment"
+    },
+    "alerts": {
+      "title": "Alerts",
+      "subtitle": "Status messages",
+      "successMsg": "Votre simulation a été sauvegardée.",
+      "infoMsg": "Un nouveau simulateur est disponible.",
+      "warningMsg": "Pensez à vérifier vos hypothèses.",
+      "errorMsg": "Une erreur est survenue."
+    },
+    "form": {
+      "title": "Form",
+      "subtitle": "Inputs + actions",
+      "fullName": "Nom complet",
+      "searchPlaceholder": "Rechercher un simulateur",
+      "save": "Enregistrer",
+      "preview": "Aperçu"
+    }
+  }
+}

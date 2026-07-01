@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { ThemeEditor } from './style/ThemeEditor';
+import './i18n';
 import './style/theme.css';
 import './index.css';
 

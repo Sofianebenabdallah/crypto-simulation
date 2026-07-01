@@ -26,3 +26,6 @@ export type { LogoProps } from './Logo';
 
 export { StepChip } from './StepChip';
 export { StatTile } from './StatTile';
+
+export { LanguageSwitcher } from './LanguageSwitcher';
+export type { LanguageSwitcherProps } from './LanguageSwitcher';

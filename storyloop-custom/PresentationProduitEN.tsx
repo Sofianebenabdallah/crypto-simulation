@@ -1,14 +1,14 @@
 /**
  * @krisspy-file
  * @type canvas
- * @name "Présentation produit — S'investir"
+ * @name "Product presentation — S'investir"
  *
- * Board de présentation façon Product Manager pour la suite de simulateurs
- * S'investir : la marque, le design system, puis les pages du produit.
- * Les aperçus sont des iframes du build déployé (pas de PreviewNode) :
+ * Product-Manager style presentation board for the S'investir simulator
+ * suite: the brand, the design system, then the product pages.
+ * Previews are iframes of the deployed build (no PreviewNode):
  * BASE_URL = https://preview.sinvestir.deploy.krisspy.ai
- * On y montre notamment le flow de la modal d'intégration (/crypto?embed=1)
- * et la version embarquable (/crypto/embed?...&layout=false).
+ * It notably shows the embed modal flow (/crypto?embed=1)
+ * and the embeddable version (/crypto/embed?...&layout=false).
  */
 import React from 'react';
 import {
@@ -33,11 +33,11 @@ import {
 } from '@krisspy/canvas';
 
 // ─────────────────────────────────────────────────────────────
-// Lien de déploiement — les iframes pointent ici (pas les PreviewNode)
+// Deployment link — iframes point here (not the PreviewNode)
 // ─────────────────────────────────────────────────────────────
 const BASE_URL = 'https://preview.sinvestir.deploy.krisspy.ai';
 
-// Palette S'investir (extraite de theme.css)
+// S'investir palette (extracted from theme.css)
 const C = {
   primary: '#0049C6',
   azure: '#1098F7',
@@ -58,14 +58,14 @@ const FONT_LABEL = "'Lexend', system-ui, sans-serif";
 const stopEvents = (e: React.MouseEvent | React.KeyboardEvent) => e.stopPropagation();
 
 // ─────────────────────────────────────────────────────────────
-// Brand hero — titre principal éditable
+// Brand hero — editable main title
 // ─────────────────────────────────────────────────────────────
 const BrandHeroNode = ({ id, data: initial }: any) => {
   const [data, updateData] = useKrisspyNodeData(id, {
-    badge: "Suite S'investir",
-    title: 'Chiffrer chaque décision d’investissement',
+    badge: "S'investir Suite",
+    title: 'Quantify every investment decision',
     subtitle:
-      'Une suite d’outils sombres, unifiés et intégrables. Premier livrable : le simulateur crypto DCA.',
+      'A suite of dark, unified and embeddable tools. First deliverable: the crypto DCA simulator.',
     ...initial,
   });
 
@@ -150,7 +150,7 @@ const BrandHeroNode = ({ id, data: initial }: any) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// Section title — intertitre narratif éditable
+// Section title — editable narrative heading
 // ─────────────────────────────────────────────────────────────
 const SectionTitleNode = ({ id, data: initial }: any) => {
   const [data, updateData] = useKrisspyNodeData(id, {
@@ -225,12 +225,12 @@ const SectionTitleNode = ({ id, data: initial }: any) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// Brand panel — identité visuelle : couleurs + typographies
+// Brand panel — visual identity: colors + typography
 // ─────────────────────────────────────────────────────────────
 const BrandPanelNode = ({ id, data: initial }: any) => {
   const [data, updateData] = useKrisspyNodeData(id, {
-    title: 'Identité S’investir',
-    subtitle: 'Dark financial · issue du Figma',
+    title: "S'investir identity",
+    subtitle: 'Dark financial · from Figma',
     colors: [],
     fonts: [],
     ...initial,
@@ -309,7 +309,7 @@ const BrandPanelNode = ({ id, data: initial }: any) => {
         </div>
 
         <div style={{ fontFamily: FONT_LABEL, fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.textMuted, marginBottom: 12 }}>
-          Typographie
+          Typography
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {fonts.map((f: any, i: number) => (
@@ -337,8 +337,8 @@ const BrandPanelNode = ({ id, data: initial }: any) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// Browser frame — iframe du build déployé, avec une chrome de navigateur
-// L'iframe est rendue à une largeur "desktop" puis mise à l'échelle.
+// Browser frame — iframe of the deployed build, with browser chrome
+// The iframe renders at a "desktop" width then is scaled down.
 // ─────────────────────────────────────────────────────────────
 const ICONS: Record<string, any> = {
   home: Home,
@@ -390,7 +390,7 @@ const BrowserFrameNode = ({ id, data: initial }: any) => {
       <Handle type="target" position={Position.Left} style={{ background: accent, width: 10, height: 10, top: 40 }} />
       <Handle type="source" position={Position.Right} style={{ background: accent, width: 10, height: 10, top: 40 }} />
 
-      {/* Barre de navigateur — zone de drag */}
+      {/* Browser bar — drag zone */}
       <div
         className="drag-handle"
         style={{
@@ -434,7 +434,7 @@ const BrowserFrameNode = ({ id, data: initial }: any) => {
         <span style={{ fontFamily: FONT_LABEL, fontSize: 12, fontWeight: 600, color: '#fff' }}>{data.title ?? ''}</span>
       </div>
 
-      {/* Aperçu live — iframe mise à l'échelle */}
+      {/* Live preview — scaled iframe */}
       <div
         className="nodrag nopan nowheel"
         style={{ width: frameWidth, height: iframeH, overflow: 'hidden', position: 'relative', background: C.bg }}
@@ -457,9 +457,9 @@ const BrowserFrameNode = ({ id, data: initial }: any) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// Device frame — mockup tablette / mobile réaliste (bezel + notch/caméra)
-// L'iframe est rendue à la largeur du device puis mise à l'échelle,
-// pour déclencher le vrai responsive de la page.
+// Device frame — realistic tablet / mobile mockup (bezel + notch/camera)
+// The iframe renders at the device width then is scaled down,
+// to trigger the page's real responsive behaviour.
 // ─────────────────────────────────────────────────────────────
 const DeviceFrameNode = ({ id, data: initial }: any) => {
   const [data, updateData] = useKrisspyNodeData(id, {
@@ -507,7 +507,7 @@ const DeviceFrameNode = ({ id, data: initial }: any) => {
         <Handle type="target" position={Position.Left} style={{ background: accent, width: 10, height: 10 }} />
         <Handle type="source" position={Position.Right} style={{ background: accent, width: 10, height: 10 }} />
 
-        {/* Écran */}
+        {/* Screen */}
         <div
           className="nodrag nopan nowheel"
           style={{
@@ -532,7 +532,7 @@ const DeviceFrameNode = ({ id, data: initial }: any) => {
             }}
           />
 
-          {/* Notch mobile / caméra tablette */}
+          {/* Mobile notch / tablet camera */}
           {isTablet ? (
             <span
               style={{
@@ -569,7 +569,7 @@ const DeviceFrameNode = ({ id, data: initial }: any) => {
           )}
         </div>
 
-        {/* Boutons latéraux (mobile uniquement) */}
+        {/* Side buttons (mobile only) */}
         {!isTablet && (
           <>
             <span style={{ position: 'absolute', right: -2, top: 90, width: 3, height: 46, borderRadius: 3, background: 'rgba(255,255,255,0.16)' }} />
@@ -579,7 +579,7 @@ const DeviceFrameNode = ({ id, data: initial }: any) => {
         )}
       </div>
 
-      {/* Légende device */}
+      {/* Device caption */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         {isTablet ? <Tablet size={14} color={accent} /> : <Smartphone size={14} color={accent} />}
         <span
@@ -601,7 +601,7 @@ const DeviceFrameNode = ({ id, data: initial }: any) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// Post-it — annotation PM éditable
+// Post-it — editable PM annotation
 // ─────────────────────────────────────────────────────────────
 const NoteNode = ({ id, data: initial }: any) => {
   const [data, updateData] = useKrisspyNodeData(id, {
@@ -672,46 +672,46 @@ const nodeTypes = {
   note: NoteNode,
 };
 
-// Hauteurs calculées : 46 (barre) + designHeight*scale
+// Computed heights: 46 (bar) + designHeight*scale
 // w760 → 557 · w820 → 597 · w900 → 651
 const INITIAL_NODES: any[] = [
-  {"id":"hero","type":"brandHero","position":{"x":470,"y":0},"data":{"badge":"Suite S'investir","title":"Chiffrer chaque décision d’investissement","subtitle":"Une suite d’outils sombres, unifiés et intégrables. Premier livrable : le simulateur crypto DCA, avec version embarquable par iframe."},"width":920,"height":235},
-  {"id":"sec-brand","type":"sectionTitle","position":{"x":40,"y":340},"data":{"step":"01","title":"La marque & le design system","subtitle":"Une identité « dark financial » issue du Figma, centralisée dans theme.css. Chaque token pilote toute l’UI via le Theme Editor."},"width":620,"height":93},
-  {"id":"brand-panel","type":"brandPanel","position":{"x":40,"y":500},"data":{"title":"Identité S’investir","subtitle":"Dark financial · issue du Figma","colors":[{"name":"Primary","value":"#0049C6"},{"name":"Azure","value":"#1098F7"},{"name":"Periwinkle","value":"#7899CE"},{"name":"Success","value":"#22c55e"},{"name":"Danger","value":"#ef4444"},{"name":"Surface","value":"#030B1F"}],"fonts":[{"name":"Plus Jakarta Sans","role":"Titres & corps"},{"name":"Lexend","role":"Boutons & labels"}]},"width":480,"height":518},
+  {"id":"hero","type":"brandHero","position":{"x":470,"y":0},"data":{"badge":"S'investir Suite","title":"Quantify every investment decision","subtitle":"A suite of dark, unified and embeddable tools. First deliverable: the crypto DCA simulator, with an iframe-embeddable version."},"width":920,"height":235},
+  {"id":"sec-brand","type":"sectionTitle","position":{"x":40,"y":340},"data":{"step":"01","title":"The brand & the design system","subtitle":"A “dark financial” identity from Figma, centralised in theme.css. Every token drives the whole UI through the Theme Editor."},"width":620,"height":93},
+  {"id":"brand-panel","type":"brandPanel","position":{"x":40,"y":500},"data":{"title":"S'investir identity","subtitle":"Dark financial · from Figma","colors":[{"name":"Primary","value":"#0049C6"},{"name":"Azure","value":"#1098F7"},{"name":"Periwinkle","value":"#7899CE"},{"name":"Success","value":"#22c55e"},{"name":"Danger","value":"#ef4444"},{"name":"Surface","value":"#030B1F"}],"fonts":[{"name":"Plus Jakarta Sans","role":"Headings & body"},{"name":"Lexend","role":"Buttons & labels"}]},"width":480,"height":518},
   {"id":"frame-designsystem","type":"browserFrame","position":{"x":600,"y":500},"data":{"title":"Design System","route":"/designsystem","icon":"palette","accent":"#1098F7","frameWidth":900,"designWidth":1280,"designHeight":860},"width":900,"height":653},
-  {"id":"note-designsystem","type":"note","position":{"x":1560,"y":560},"data":{"label":"Pourquoi","accent":"#7899CE","text":"Le design system est la vitrine vivante : tokens, échelle 50→900, composants (boutons, cartes, badges, inputs). Modifier un token met toutes les pages à jour."},"width":340,"height":164},
-  {"id":"sec-pages","type":"sectionTitle","position":{"x":40,"y":1320},"data":{"step":"02","title":"Les pages du produit","subtitle":"Routing basé sur les fichiers : chaque écran a un rôle précis dans le parcours."},"width":620,"height":72},
-  {"id":"frame-home","type":"browserFrame","position":{"x":40,"y":1480},"data":{"title":"Accueil","route":"/","icon":"home","accent":"#0049C6","frameWidth":760,"designWidth":1280,"designHeight":860},"width":760,"height":559},
-  {"id":"note-home","type":"note","position":{"x":40,"y":2070},"data":{"label":"Accueil · /","accent":"#0049C6","text":"Porte d’entrée : présente la suite et oriente vers le simulateur, la landing et le design system, avec le rôle de chaque page."},"width":340,"height":164},
+  {"id":"note-designsystem","type":"note","position":{"x":1560,"y":560},"data":{"label":"Why","accent":"#7899CE","text":"The design system is the living showcase: tokens, 50→900 scale, components (buttons, cards, badges, inputs). Changing a token updates every page."},"width":340,"height":164},
+  {"id":"sec-pages","type":"sectionTitle","position":{"x":40,"y":1320},"data":{"step":"02","title":"The product pages","subtitle":"File-based routing: each screen has a precise role in the journey."},"width":620,"height":72},
+  {"id":"frame-home","type":"browserFrame","position":{"x":40,"y":1480},"data":{"title":"Home","route":"/","icon":"home","accent":"#0049C6","frameWidth":760,"designWidth":1280,"designHeight":860},"width":760,"height":559},
+  {"id":"note-home","type":"note","position":{"x":40,"y":2070},"data":{"label":"Home · /","accent":"#0049C6","text":"Entry point: presents the suite and routes to the simulator, the landing and the design system, with the role of each page."},"width":340,"height":164},
   {"id":"frame-landing","type":"browserFrame","position":{"x":880,"y":1480},"data":{"title":"Landing","route":"/sinvestir","icon":"layout","accent":"#1098F7","frameWidth":760,"designWidth":1280,"designHeight":860},"width":760,"height":559},
-  {"id":"note-landing","type":"note","position":{"x":880,"y":2070},"data":{"label":"Landing · /sinvestir","accent":"#1098F7","text":"Page vitrine marketing reprise du Figma. Sert de référence de design (@design \"reference\") pour toutes les autres pages."},"width":340,"height":164},
-  {"id":"sec-crypto","type":"sectionTitle","position":{"x":40,"y":2360},"data":{"step":"03","title":"Simulateur crypto & intégration","subtitle":"Le cœur du produit : un simulateur DCA sur données réelles, et sa version embarquable façon YouTube (modal → snippet iframe)."},"width":620,"height":93},
-  {"id":"frame-crypto","type":"browserFrame","position":{"x":40,"y":2540},"data":{"title":"Simulateur","route":"/crypto","icon":"coins","accent":"#0049C6","frameWidth":760,"designWidth":1280,"designHeight":900},"width":760,"height":582},
-  {"id":"frame-crypto-modal","type":"browserFrame","position":{"x":900,"y":2540},"data":{"title":"Modal d’intégration","route":"/crypto?embed=1","displayUrl":"preview.sinvestir.deploy.krisspy.ai/crypto?embed=1","icon":"cursor","accent":"#1098F7","frameWidth":760,"designWidth":1280,"designHeight":900},"width":760,"height":582},
-  {"id":"frame-embed","type":"browserFrame","position":{"x":1760,"y":2540},"data":{"title":"Version embarquée","route":"/crypto/embed?asset=bitcoin&currency=eur&amount=50&frequency=weekly&layout=false","displayUrl":"preview.sinvestir.deploy.krisspy.ai/crypto/embed?…&layout=false","icon":"code","accent":"#22c55e","frameWidth":700,"designWidth":900,"designHeight":1000},"width":700,"height":826},
-  {"id":"note-crypto","type":"note","position":{"x":40,"y":3150},"data":{"label":"Simulateur · /crypto","accent":"#0049C6","text":"Actif, montant, fréquence et période → capital, quantité, prix moyen, gains/pertes + graphiques historique & P/L avec zoom temporel."},"width":340,"height":164},
-  {"id":"note-modal","type":"note","position":{"x":900,"y":3150},"data":{"label":"Flow d’intégration","accent":"#1098F7","text":"?embed=1 ouvre la modal façon YouTube : on règle les paramètres, on voit un aperçu live, puis on copie le lien direct ou le snippet <iframe>."},"width":340,"height":164},
-  {"id":"note-embed","type":"note","position":{"x":1758.8459102444506,"y":3400.4374769542133},"data":{"label":"Embarquable · /crypto/embed","accent":"#22c55e","text":"Configurée par paramètres GET. layout=false retire l’habillage, theme=light surcharge les variables, readonly=true verrouille les champs."},"width":340,"height":164},
-  {"id":"sec-tour","type":"sectionTitle","position":{"x":40,"y":3760},"data":{"step":"04","title":"Parcours découverte — product tour","subtitle":"Une version onboardée du simulateur qui guide l’utilisateur pas à pas. Chaque étape vit dans l’URL (?step=…), donc rejouable et intégrable telle quelle."},"width":620,"height":93},
-  {"id":"frame-tour-montant","type":"browserFrame","position":{"x":40,"y":3960},"data":{"title":"Étape 1 · La mise","route":"/crypto/decouverte?step=montant","displayUrl":"…/crypto/decouverte?step=montant","icon":"coins","accent":"#0049C6","frameWidth":700,"designWidth":1280,"designHeight":900},"width":700,"height":540},
-  {"id":"frame-tour-actif","type":"browserFrame","position":{"x":800,"y":3960},"data":{"title":"Étape 2 · La crypto","route":"/crypto/decouverte?step=actif&amount=50&frequency=monthly","displayUrl":"…?step=actif&amount=50&frequency=monthly","icon":"cursor","accent":"#1098F7","frameWidth":700,"designWidth":1280,"designHeight":900},"width":700,"height":540},
-  {"id":"frame-tour-resultats","type":"browserFrame","position":{"x":1560,"y":3960},"data":{"title":"Étape 3 · Le résultat","route":"/crypto/decouverte?step=resultats&asset=bitcoin&amount=50&frequency=monthly","displayUrl":"…?step=resultats&asset=bitcoin&amount=50…","icon":"coins","accent":"#22c55e","frameWidth":700,"designWidth":1280,"designHeight":1500},"width":700,"height":868},
-  {"id":"note-tour","type":"note","position":{"x":40,"y":4540},"data":{"label":"Pourquoi un product tour","accent":"#0049C6","text":"Plutôt qu’un pavé de texte, on onboarde : mise → crypto (top 5) → révélation des courbes. L’utilisateur peut revenir en arrière ou ouvrir le simulateur complet."},"width":340,"height":164},
-  {"id":"note-tour-url","type":"note","position":{"x":800,"y":4540},"data":{"label":"Étapes dans l’URL","accent":"#1098F7","text":"?step=montant | actif | resultats, plus amount / frequency / asset. Chaque écran est reproductible, ce qui permet de le rejouer ici en iframe pour raconter le workflow."},"width":340,"height":164},
-  {"id":"sec-responsive","type":"sectionTitle","position":{"x":2700,"y":2360},"data":{"step":"05","title":"Responsive — web, tablette, mobile","subtitle":"Le simulateur embarquable s’adapte à toutes les tailles d’écran. Même URL, même contenu : la mise en page se réorganise automatiquement selon la largeur du viewport."},"width":620,"height":93},
+  {"id":"note-landing","type":"note","position":{"x":880,"y":2070},"data":{"label":"Landing · /sinvestir","accent":"#1098F7","text":"Marketing showcase page taken from Figma. Serves as the design reference (@design \"reference\") for all other pages."},"width":340,"height":164},
+  {"id":"sec-crypto","type":"sectionTitle","position":{"x":40,"y":2360},"data":{"step":"03","title":"Crypto simulator & embedding","subtitle":"The heart of the product: a DCA simulator on real data, and its YouTube-style embeddable version (modal → iframe snippet)."},"width":620,"height":93},
+  {"id":"frame-crypto","type":"browserFrame","position":{"x":40,"y":2540},"data":{"title":"Simulator","route":"/crypto","icon":"coins","accent":"#0049C6","frameWidth":760,"designWidth":1280,"designHeight":900},"width":760,"height":582},
+  {"id":"frame-crypto-modal","type":"browserFrame","position":{"x":900,"y":2540},"data":{"title":"Embed modal","route":"/crypto?embed=1","displayUrl":"preview.sinvestir.deploy.krisspy.ai/crypto?embed=1","icon":"cursor","accent":"#1098F7","frameWidth":760,"designWidth":1280,"designHeight":900},"width":760,"height":582},
+  {"id":"frame-embed","type":"browserFrame","position":{"x":1760,"y":2540},"data":{"title":"Embedded version","route":"/crypto/embed?asset=bitcoin&currency=eur&amount=50&frequency=weekly&layout=false","displayUrl":"preview.sinvestir.deploy.krisspy.ai/crypto/embed?…&layout=false","icon":"code","accent":"#22c55e","frameWidth":700,"designWidth":900,"designHeight":1000},"width":700,"height":826},
+  {"id":"note-crypto","type":"note","position":{"x":40,"y":3150},"data":{"label":"Simulator · /crypto","accent":"#0049C6","text":"Asset, amount, frequency and period → capital, quantity, average price, gains/losses + history & P/L charts with time zoom."},"width":340,"height":164},
+  {"id":"note-modal","type":"note","position":{"x":900,"y":3150},"data":{"label":"Embed flow","accent":"#1098F7","text":"?embed=1 opens the YouTube-style modal: set the parameters, see a live preview, then copy the direct link or the <iframe> snippet."},"width":340,"height":164},
+  {"id":"note-embed","type":"note","position":{"x":1758.8459102444506,"y":3400.4374769542133},"data":{"label":"Embeddable · /crypto/embed","accent":"#22c55e","text":"Configured through GET parameters. layout=false removes the chrome, theme=light overrides the variables, readonly=true locks the fields."},"width":340,"height":164},
+  {"id":"sec-tour","type":"sectionTitle","position":{"x":40,"y":3760},"data":{"step":"04","title":"Discovery journey — product tour","subtitle":"An onboarded version of the simulator that guides the user step by step. Each step lives in the URL (?step=…), so it is replayable and embeddable as-is."},"width":620,"height":93},
+  {"id":"frame-tour-montant","type":"browserFrame","position":{"x":40,"y":3960},"data":{"title":"Step 1 · The stake","route":"/crypto/decouverte?step=montant","displayUrl":"…/crypto/decouverte?step=montant","icon":"coins","accent":"#0049C6","frameWidth":700,"designWidth":1280,"designHeight":900},"width":700,"height":540},
+  {"id":"frame-tour-actif","type":"browserFrame","position":{"x":800,"y":3960},"data":{"title":"Step 2 · The crypto","route":"/crypto/decouverte?step=actif&amount=50&frequency=monthly","displayUrl":"…?step=actif&amount=50&frequency=monthly","icon":"cursor","accent":"#1098F7","frameWidth":700,"designWidth":1280,"designHeight":900},"width":700,"height":540},
+  {"id":"frame-tour-resultats","type":"browserFrame","position":{"x":1560,"y":3960},"data":{"title":"Step 3 · The result","route":"/crypto/decouverte?step=resultats&asset=bitcoin&amount=50&frequency=monthly","displayUrl":"…?step=resultats&asset=bitcoin&amount=50…","icon":"coins","accent":"#22c55e","frameWidth":700,"designWidth":1280,"designHeight":1500},"width":700,"height":868},
+  {"id":"note-tour","type":"note","position":{"x":40,"y":4540},"data":{"label":"Why a product tour","accent":"#0049C6","text":"Rather than a wall of text, we onboard: stake → crypto (top 5) → reveal of the curves. The user can go back or open the full simulator."},"width":340,"height":164},
+  {"id":"note-tour-url","type":"note","position":{"x":800,"y":4540},"data":{"label":"Steps in the URL","accent":"#1098F7","text":"?step=montant | actif | resultats, plus amount / frequency / asset. Each screen is reproducible, which lets us replay it here in an iframe to tell the workflow story."},"width":340,"height":164},
+  {"id":"sec-responsive","type":"sectionTitle","position":{"x":2700,"y":2360},"data":{"step":"05","title":"Responsive — web, tablet, mobile","subtitle":"The embeddable simulator adapts to every screen size. Same URL, same content: the layout reflows automatically based on the viewport width."},"width":620,"height":93},
   {"id":"frame-resp-web","type":"browserFrame","position":{"x":2700,"y":2540},"data":{"title":"Web · Desktop","route":"/crypto/embed?asset=bitcoin&currency=eur&amount=50&frequency=weekly&layout=false","displayUrl":"…/crypto/embed · 1280px","icon":"monitor","accent":"#0049C6","frameWidth":620,"designWidth":1280,"designHeight":900},"width":620,"height":484},
-  {"id":"frame-resp-tablet","type":"deviceFrame","position":{"x":3380,"y":2540},"data":{"device":"tablet","title":"Tablette · 768px","route":"/crypto/embed?asset=bitcoin&currency=eur&amount=50&frequency=weekly&layout=false","accent":"#1098F7","screenWidth":360,"designWidth":768,"designHeight":1024},"width":388,"height":544},
+  {"id":"frame-resp-tablet","type":"deviceFrame","position":{"x":3380,"y":2540},"data":{"device":"tablet","title":"Tablet · 768px","route":"/crypto/embed?asset=bitcoin&currency=eur&amount=50&frequency=weekly&layout=false","accent":"#1098F7","screenWidth":360,"designWidth":768,"designHeight":1024},"width":388,"height":544},
   {"id":"frame-resp-mobile","type":"deviceFrame","position":{"x":3830,"y":2540},"data":{"device":"mobile","title":"Mobile · 390px","route":"/crypto/embed?asset=bitcoin&currency=eur&amount=50&frequency=weekly&layout=false","accent":"#22c55e","screenWidth":250,"designWidth":390,"designHeight":844},"width":274,"height":601},
-  {"id":"note-responsive","type":"note","position":{"x":2700,"y":3200},"data":{"label":"Pourquoi le responsive","accent":"#0049C6","text":"Un seul embed pour tous les supports : article de blog en desktop, app tablette ou mobile. Les colonnes du simulateur passent en pile, les graphiques se redimensionnent, aucun réglage supplémentaire côté intégrateur."},"width":340,"height":164},
+  {"id":"note-responsive","type":"note","position":{"x":2700,"y":3200},"data":{"label":"Why responsive","accent":"#0049C6","text":"A single embed for every device: blog article on desktop, tablet or mobile app. The simulator columns stack, the charts resize, no extra setup on the integrator's side."},"width":340,"height":164},
 ];
 
 const INITIAL_EDGES = [
-  {"id":"e-brand-ds","source":"brand-panel","target":"frame-designsystem","type":"smoothstep","label":"Tokens en action","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
-  {"id":"e-crypto-modal","source":"frame-crypto","target":"frame-crypto-modal","type":"smoothstep","label":"1 · « Intégrer ce simulateur »","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
-  {"id":"e-modal-embed","source":"frame-crypto-modal","target":"frame-embed","type":"smoothstep","label":"2 · Copier le snippet iframe","animated":true,"style":{"stroke":"#22c55e","strokeWidth":2}},
-  {"id":"e-tour-1-2","source":"frame-tour-montant","target":"frame-tour-actif","type":"smoothstep","label":"Continuer","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
-  {"id":"e-tour-2-3","source":"frame-tour-actif","target":"frame-tour-resultats","type":"smoothstep","label":"Choix de la crypto","animated":true,"style":{"stroke":"#22c55e","strokeWidth":2}},
-  {"id":"e-embed-resp","source":"frame-embed","target":"frame-resp-web","type":"smoothstep","label":"Le même embed, partout","animated":true,"style":{"stroke":"#7899CE","strokeWidth":2}},
+  {"id":"e-brand-ds","source":"brand-panel","target":"frame-designsystem","type":"smoothstep","label":"Tokens in action","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
+  {"id":"e-crypto-modal","source":"frame-crypto","target":"frame-crypto-modal","type":"smoothstep","label":"1 · “Embed this simulator”","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
+  {"id":"e-modal-embed","source":"frame-crypto-modal","target":"frame-embed","type":"smoothstep","label":"2 · Copy the iframe snippet","animated":true,"style":{"stroke":"#22c55e","strokeWidth":2}},
+  {"id":"e-tour-1-2","source":"frame-tour-montant","target":"frame-tour-actif","type":"smoothstep","label":"Continue","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
+  {"id":"e-tour-2-3","source":"frame-tour-actif","target":"frame-tour-resultats","type":"smoothstep","label":"Choosing the crypto","animated":true,"style":{"stroke":"#22c55e","strokeWidth":2}},
+  {"id":"e-embed-resp","source":"frame-embed","target":"frame-resp-web","type":"smoothstep","label":"The same embed, everywhere","animated":true,"style":{"stroke":"#7899CE","strokeWidth":2}},
   {"id":"e-resp-web-tablet","source":"frame-resp-web","target":"frame-resp-tablet","type":"smoothstep","label":"768px","animated":true,"style":{"stroke":"#1098F7","strokeWidth":2}},
   {"id":"e-resp-tablet-mobile","source":"frame-resp-tablet","target":"frame-resp-mobile","type":"smoothstep","label":"390px","animated":true,"style":{"stroke":"#22c55e","strokeWidth":2}},
 ];
@@ -730,7 +730,7 @@ function Inner({ canvasId, filePath }: { canvasId: string; filePath: string }) {
 
   return (
     <div style={{ width: '100%', height: '100%', background: C.bg, position: 'relative' }}>
-      {/* Bandeau de marque */}
+      {/* Brand banner */}
       <div
         style={{
           position: 'absolute',
@@ -765,7 +765,7 @@ function Inner({ canvasId, filePath }: { canvasId: string; filePath: string }) {
         </span>
         <div style={{ lineHeight: 1.2 }}>
           <div style={{ fontFamily: FONT_HEADING, fontSize: 14, fontWeight: 700, color: '#fff' }}>
-            S’investir — Présentation produit
+            S’investir — Product presentation
           </div>
           <div style={{ fontFamily: FONT_LABEL, fontSize: 11, color: C.periwinkle }}>
             {BASE_URL.replace('https://', '')}
@@ -800,7 +800,7 @@ function Inner({ canvasId, filePath }: { canvasId: string; filePath: string }) {
   );
 }
 
-export default function PresentationProduit(props: { canvasId: string; filePath: string }) {
+export default function PresentationProduitEN(props: { canvasId: string; filePath: string }) {
   return (
     <ReactFlowProvider>
       <Inner {...props} />

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Check, Copy, ExternalLink, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { SimulationInput } from '../../../types/crypto';
 import { DEFAULT_CONFIG, serializeEmbedParams } from '../../../lib/crypto/queryParams';
 import { CryptoSimulatorForm } from './CryptoSimulatorForm';
@@ -12,6 +13,7 @@ interface Props {
 }
 
 function CopyField({ label, value }: { label: string; value: string }) {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -35,7 +37,7 @@ function CopyField({ label, value }: { label: string; value: string }) {
           type="button"
           onClick={copy}
           className="btn btn-outline shrink-0 !px-3"
-          aria-label={`Copier ${label}`}
+          aria-label={t('embed.copy', { label })}
         >
           {copied ? <Check size={16} /> : <Copy size={16} />}
         </button>
@@ -46,6 +48,7 @@ function CopyField({ label, value }: { label: string; value: string }) {
 
 /** YouTube-style "embed" modal: configure params, preview, copy URL & iframe. */
 export function EmbedModal({ open, onClose, initialInput }: Props) {
+  const { t } = useTranslation();
   const [input, setInput] = useState<SimulationInput>(
     initialInput ?? {
       assetId: DEFAULT_CONFIG.assetId,
@@ -93,7 +96,7 @@ export function EmbedModal({ open, onClose, initialInput }: Props) {
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
-      aria-label="Intégrer le simulateur"
+      aria-label={t('embed.title')}
     >
       {/* Backdrop */}
       <div
@@ -112,16 +115,16 @@ export function EmbedModal({ open, onClose, initialInput }: Props) {
           style={{ borderColor: 'var(--border)' }}
         >
           <div>
-            <h2 className="font-heading text-lg font-semibold text-primary">Intégrer le simulateur</h2>
+            <h2 className="font-heading text-lg font-semibold text-primary">{t('embed.title')}</h2>
             <p className="text-xs text-secondary">
-              Configurez l'affichage, copiez le code puis collez-le sur votre site.
+              {t('embed.subtitle')}
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
             className="rounded-full p-1.5 text-secondary transition-colors hover:bg-white/10 hover:text-primary"
-            aria-label="Fermer"
+            aria-label={t('embed.close')}
           >
             <X size={20} />
           </button>
@@ -134,18 +137,18 @@ export function EmbedModal({ open, onClose, initialInput }: Props) {
 
             <div className="grid grid-cols-2 gap-4">
               <label className="flex flex-col gap-1.5">
-                <span className="font-label text-xs uppercase tracking-wide text-secondary">Thème</span>
+                <span className="font-label text-xs uppercase tracking-wide text-secondary">{t('embed.theme')}</span>
                 <select
                   className="input font-body"
                   value={theme}
                   onChange={(e) => setTheme(e.target.value as 'dark' | 'light')}
                 >
-                  <option value="dark" className="bg-[#030B1F]">Sombre</option>
-                  <option value="light" className="bg-[#030B1F]">Clair</option>
+                  <option value="dark" className="bg-[#030B1F]">{t('embed.themeDark')}</option>
+                  <option value="light" className="bg-[#030B1F]">{t('embed.themeLight')}</option>
                 </select>
               </label>
               <label className="flex flex-col gap-1.5">
-                <span className="font-label text-xs uppercase tracking-wide text-secondary">Hauteur (px)</span>
+                <span className="font-label text-xs uppercase tracking-wide text-secondary">{t('embed.height')}</span>
                 <input
                   type="number"
                   min={400}
@@ -165,28 +168,28 @@ export function EmbedModal({ open, onClose, initialInput }: Props) {
                 onChange={(e) => setReadonly(e.target.checked)}
               />
               <span className="text-sm text-primary">
-                Verrouiller les champs
-                <span className="text-secondary"> — les visiteurs voient le résultat sans pouvoir modifier</span>
+                {t('embed.lockFields')}
+                <span className="text-secondary">{t('embed.lockFieldsHint')}</span>
               </span>
             </label>
 
             <div className="flex flex-col gap-4 border-t pt-4" style={{ borderColor: 'var(--border)' }}>
-              <CopyField label="Lien direct" value={url} />
-              <CopyField label="Code d'intégration (iframe)" value={iframe} />
+              <CopyField label={t('embed.directLink')} value={url} />
+              <CopyField label={t('embed.iframeCode')} value={iframe} />
               <a
                 href={url}
                 target="_blank"
                 rel="noreferrer"
                 className="link-arrow self-start text-sm"
               >
-                <ExternalLink size={15} /> Ouvrir dans un nouvel onglet
+                <ExternalLink size={15} /> {t('embed.openNewTab')}
               </a>
             </div>
           </div>
 
           {/* Right — live preview */}
           <div className="flex flex-col gap-2">
-            <span className="font-label text-xs uppercase tracking-wide text-secondary">Aperçu</span>
+            <span className="font-label text-xs uppercase tracking-wide text-secondary">{t('embed.preview')}</span>
             <div
               className="overflow-hidden rounded-[16px] border"
               style={{ borderColor: 'var(--border)', height: 'min(70vh, 620px)' }}
@@ -194,7 +197,7 @@ export function EmbedModal({ open, onClose, initialInput }: Props) {
               <iframe
                 key={query}
                 src={url}
-                title="Aperçu de l'intégration"
+                title={t('embed.preview')}
                 className="h-full w-full"
                 style={{ border: 0 }}
               />

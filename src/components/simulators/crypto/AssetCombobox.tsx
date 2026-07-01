@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, ChevronDown, Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { CryptoAsset } from '../../../types/crypto';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 /** Searchable, keyboard-friendly asset picker themed on the design system. */
 export function AssetCombobox({ assets, value, onChange, disabled }: Props) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
@@ -95,7 +97,7 @@ export function AssetCombobox({ assets, value, onChange, disabled }: Props) {
         onClick={() => !disabled && setOpen((o) => !o)}
       >
         <span className={selected ? 'text-primary' : 'text-secondary'}>
-          {selected ? `${selected.name} (${selected.symbol})` : 'Sélectionner un actif'}
+          {selected ? `${selected.name} (${selected.symbol})` : t('simulator.combobox.select')}
         </span>
         <ChevronDown
           size={16}
@@ -121,14 +123,14 @@ export function AssetCombobox({ assets, value, onChange, disabled }: Props) {
                 setQuery(e.target.value);
                 setActive(0);
               }}
-              placeholder="Rechercher un actif…"
+              placeholder={t('simulator.combobox.search')}
               className="w-full bg-transparent py-2.5 pl-9 pr-3 text-sm text-primary outline-none placeholder:text-secondary/60"
             />
           </div>
 
           <ul ref={listRef} role="listbox" className="max-h-60 overflow-y-auto py-1">
             {filtered.length === 0 && (
-              <li className="px-3 py-3 text-sm text-secondary">Aucun actif trouvé</li>
+              <li className="px-3 py-3 text-sm text-secondary">{t('simulator.combobox.empty')}</li>
             )}
             {filtered.map((a, i) => {
               const isSelected = a.id === value;

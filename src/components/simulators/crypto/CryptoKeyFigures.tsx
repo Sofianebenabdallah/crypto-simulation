@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowUpRight, Calendar, Coins, PiggyBank, Tag, Wallet } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { SimulationResult } from '../../../types/crypto';
 import { formatCurrency, formatNumber, formatPercent } from '../../../lib/crypto/format';
 
@@ -31,6 +32,7 @@ function Tile({
 
 /** "Chiffres clés" — a hero result card + a grid of supporting indicators. */
 export function CryptoKeyFigures({ result }: Props) {
+  const { t } = useTranslation();
   const { currency, symbol } = result;
   const gain = result.profitLoss >= 0;
   const accent = gain ? 'var(--success)' : 'var(--danger)';
@@ -43,14 +45,15 @@ export function CryptoKeyFigures({ result }: Props) {
         <div className="relative flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="font-label text-[11px] uppercase tracking-wide text-secondary mb-1">
-              Capital final
+              {t('simulator.keyFigures.finalCapital')}
             </div>
             <div className="font-heading text-3xl sm:text-4xl font-semibold text-white">
               {formatCurrency(result.finalValue, currency)}
             </div>
             <div className="mt-1 font-label text-sm" style={{ color: accent }}>
               {gain ? '+' : ''}
-              {formatCurrency(result.profitLoss, currency)} de {gain ? 'gains' : 'pertes'}
+              {formatCurrency(result.profitLoss, currency)}{' '}
+              {gain ? t('simulator.keyFigures.gains') : t('simulator.keyFigures.losses')}
             </div>
           </div>
           <div
@@ -67,21 +70,25 @@ export function CryptoKeyFigures({ result }: Props) {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <Tile
           icon={<PiggyBank size={16} />}
-          label="Total investi"
+          label={t('simulator.keyFigures.totalInvested')}
           value={formatCurrency(result.totalInvested, currency)}
         />
         <Tile
           icon={<Coins size={16} />}
-          label={`Quantité acquise`}
+          label={t('simulator.keyFigures.quantityAcquired')}
           value={`${formatNumber(result.quantity, 2)}`}
           sub={symbol}
         />
         <Tile
           icon={<Tag size={16} />}
-          label="Prix moyen d'achat"
+          label={t('simulator.keyFigures.avgPrice')}
           value={formatCurrency(result.avgPrice, currency, 2)}
         />
-        <Tile icon={<Calendar size={16} />} label="Jours simulés" value={formatNumber(result.days, 0)} />
+        <Tile
+          icon={<Calendar size={16} />}
+          label={t('simulator.keyFigures.daysSimulated')}
+          value={formatNumber(result.days, 0)}
+        />
       </div>
     </div>
   );
