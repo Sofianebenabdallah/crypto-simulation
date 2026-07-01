@@ -1,5 +1,6 @@
 import { SUPPORTED_ASSETS } from '../../../lib/crypto/assets';
 import type { Frequency, SimulationInput } from '../../../types/crypto';
+import { AssetCombobox } from './AssetCombobox';
 
 interface Props {
   value: SimulationInput;
@@ -31,18 +32,12 @@ export function CryptoSimulatorForm({ value, onChange, readonly }: Props) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <Field label="Actif numérique">
-        <select
-          className="input font-body"
+        <AssetCombobox
+          assets={SUPPORTED_ASSETS}
           value={value.assetId}
           disabled={disabled}
-          onChange={(e) => onChange({ assetId: e.target.value })}
-        >
-          {SUPPORTED_ASSETS.map((a) => (
-            <option key={a.id} value={a.id} className="bg-[#030B1F]">
-              {a.name} ({a.symbol})
-            </option>
-          ))}
-        </select>
+          onChange={(assetId) => onChange({ assetId })}
+        />
       </Field>
 
       <Field label="Montant par opération">
